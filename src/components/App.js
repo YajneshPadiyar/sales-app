@@ -1,5 +1,5 @@
 //import agent from '../agent';
-import Header from './Header';
+import AppHeader from './AppHeader';
 import React from 'react';
 import { connect } from 'react-redux';
 import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
@@ -48,7 +48,7 @@ class App extends React.Component {
     if (this.props.appLoaded) {
       return (
         <div>
-          <Header
+          <AppHeader
             appName={this.props.appName}
             currentUser={this.props.currentUser} />
             <Switch>
@@ -60,7 +60,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <Header
+        <AppHeader
           appName={this.props.appName}
           currentUser={this.props.currentUser} />
       </div>
