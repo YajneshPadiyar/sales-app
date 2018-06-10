@@ -1,6 +1,6 @@
 import {  put,  takeLatest } from 'redux-saga/effects'
-//import { AUTHENTICATE } from './container/LoginPage/constants';
-//import { performValidateLogin } from './container/LoginPage/actions';
+import { AUTHENTICATE } from './constants/actionTypes';
+import { performValidateLogin } from './components/Login/actions';
 //import {
 //LOGIN_USER_NAME,
 //LOGIN_PASSWORD,
@@ -9,12 +9,12 @@ import {  put,  takeLatest } from 'redux-saga/effects'
 function* validateLogin(action) {
   console.log("Worker Saga ");
   console.log(action);
-  /* try {
+  try {
       //const user = yield call(Api.fetchUser, action.payload.userId);
-      yield put(performValidateLogin(action.LOGIN_USER_NAME, action.LOGIN_PASSWORD));
+      yield put(performValidateLogin(action.USER_NAME, action.PASSWORD));
    } catch (e) {
-      yield put(performValidateLogin(action.LOGIN_USER_NAME, action.LOGIN_PASSWORD));
-   }*/
+      yield put(performValidateLogin(action.USER_NAME, action.PASSWORD));
+   }
 }
 
 
@@ -27,5 +27,5 @@ function* validateLogin(action) {
 */
 export default function* mySaga() {
   console.log("mySaga");
-  yield takeLatest("AUTHENTICATE", validateLogin);
+  yield takeLatest(AUTHENTICATE, validateLogin);
 }
