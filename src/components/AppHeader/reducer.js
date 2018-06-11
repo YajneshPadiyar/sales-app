@@ -1,4 +1,4 @@
-import { MENU_CHANGE, MENU_CLICK } from './constants';
+import { MENU_CHANGE } from './constants';
 
 const initialState = {
   isMenuOpen: false

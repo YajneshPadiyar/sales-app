@@ -7,9 +7,20 @@ import { Route, Switch } from 'react-router-dom';
 
 import Home from './Home';
 import Login from './Login';
+import Customers from './Customers';
+import Sales from './Sales';
+import Zones from './Zones';
 
 import { store } from '../store';
 import { push } from 'react-router-redux';
+
+import {
+  HOME_PAGE_PATH,
+  CUSTOMER_PAGE_PATH,
+  DEFAULT_PATH,
+  SALES_PAGE_PATH,
+  ZONE_PAGE_PATH
+} from '../constants/actionTypes';
 
 const mapStateToProps = state => {
   return {
@@ -52,8 +63,11 @@ class App extends React.Component {
             appName={this.props.appName}
             currentUser={this.props.currentUser} />
             <Switch>
-            <Route exact path="/" component={Login}/>
-            <Route path="/home" component={Home} />
+            <Route exact path={DEFAULT_PATH} component={Login}/>
+            <Route path={HOME_PAGE_PATH} component={Home} />
+            <Route path={CUSTOMER_PAGE_PATH} component={Customers} />
+            <Route path={SALES_PAGE_PATH} component={Sales} />
+            <Route path={ZONE_PAGE_PATH} component={Zones} />
             </Switch>
         </div>
       );
