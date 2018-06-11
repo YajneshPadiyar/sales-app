@@ -1,8 +1,7 @@
 
 import {
   USER_NAME_CHANGE,
-  PASSWORD_CHANGE,
-  APPLICATION_LOGIN
+  PASSWORD_CHANGE
 } from './constants';
 
 const initialState = {

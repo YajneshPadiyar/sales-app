@@ -7,6 +7,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
+import {MenuItems} from './MenuItems';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -30,11 +32,12 @@ class ApplicationMenu extends Component {
     this.setState(newProps);
   }
 
-  OnMenuItemClick = (event) => {
-    alert("Selected MenuItem is ");
-    console.log(event);
+  OnMenuItemClick =(path)=> (event) => {
+    //alert("Selected MenuItem is ");
+    console.log(path);
+
     this.setState({openMenu: false});
-    this.props.menuHandler();
+    this.props.menuHandler(path);
   }
 
   DockerRequestHandler = (event) =>{
@@ -46,19 +49,14 @@ class ApplicationMenu extends Component {
     //console.log(classes);
     //const { anchor, open } = this.state;
 
-    const MenuItems = [
-      { name: "Home", key: "Home", icon: <InboxIcon /> },
-      //{ type: "Divider", key: "FirstSection" },
-      { name: "Customers", key: "Customers", icon: <InboxIcon /> },
-      { name: "Sales List", key: "Sales", icon: <InboxIcon /> },
-      { name: "Customers", key: "Customers", icon: <InboxIcon /> },
-      { type: "Divider", key: "DecondSection"},
-      { name: "Logout", key: "Logout", icon: <InboxIcon /> }
-    ];
+
 
     const MenuMap = MenuItems.map( item =>
       (item.type === "Divider" ? <Divider key={item.key} /> :
-      <ListItem key={item.key} button onClick={this.OnMenuItemClick}>
+      <ListItem
+        key={item.key}
+        button onClick={this.OnMenuItemClick(item.path)}
+      >
         <ListItemIcon>
           {item.icon}
         </ListItemIcon>
