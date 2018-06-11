@@ -51,7 +51,7 @@ class ApplicationMenu extends Component {
       //{ type: "Divider", key: "FirstSection" },
       { name: "Customers", key: "Customers", icon: <InboxIcon /> },
       { name: "Sales List", key: "Sales", icon: <InboxIcon /> },
-      { name: "Customers", key: "Customers", icon: <InboxIcon /> },
+      { name: "Customers", key: "Customers1", icon: <InboxIcon /> },
       { type: "Divider", key: "DecondSection"},
       { name: "Logout", key: "Logout", icon: <InboxIcon /> }
     ];
