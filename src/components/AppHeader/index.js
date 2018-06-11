@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import ApplicationMenu from '../ApplicationMenu';
-import {onMenuChange} from './actions';
+import { onMenuChange, onMenuClick } from './actions';
 const styles = {
   root: {
     flexGrow: 1,
@@ -49,7 +49,7 @@ class AppHeader extends React.Component {
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
-              onClick={this.props.menuHandler}
+              onClick={this.props.menuClick}
               >
               <MenuIcon />
             </IconButton>
@@ -73,7 +73,12 @@ const mapStatesToProps = state => (
 );
 const mapDispatchToProps = dispatch => {
   return {
-      menuHandler: (e) => dispatch(onMenuChange())
+      menuHandler: (path) => {
+        dispatch(onMenuChange());
+        dispatch(onMenuClick(path));
+        console.log(path);
+      },
+      menuClick: (e) => dispatch(onMenuChange())
   }
 }
 

@@ -4,7 +4,8 @@ import {
   LOGOUT,
   LOGIN,
   REGISTER,
-  APPLICATION_LOGIN
+  APPLICATION_LOGIN,
+  APP_GOTO_PAGE
 } from '../constants/actionTypes';
 
 const defaultState = {
@@ -35,6 +36,11 @@ export default (state = defaultState, action) => {
         //token: action.error ? null : action.payload.user.token,
         //currentUser: action.error ? null : action.payload.user
       };
+    case APP_GOTO_PAGE:
+    return {
+      ...state,
+      redirectTo: action.path
+    };
     default:
       return state;
   }
