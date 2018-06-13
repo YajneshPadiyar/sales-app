@@ -23,7 +23,7 @@ import {onInputChange} from './actions';
 const styles = theme => ({
   root: {
     display: 'flex',
-    marginTop: 10,
+    marginTop: 2
   },
   wrapper: {
     minWidth: 600,
@@ -46,7 +46,7 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   typography: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   }
 });
 
