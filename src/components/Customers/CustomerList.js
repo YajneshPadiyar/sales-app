@@ -21,7 +21,10 @@ import { getCustomerList } from './actions';
 
 const styles = theme => ({
   paper:{
-    minWidth: 400
+    minWidth: 400,
+    maxHeight: 670,
+    overflow: 'scroll',
+    overflowX: 'hidden',
   }
 });
 
