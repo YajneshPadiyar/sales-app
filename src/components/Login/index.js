@@ -29,7 +29,7 @@ const styles = theme => ({
 
 class Login extends Component{
   render(){
-  console.log(this.props);
+  //console.log(this.props);
     return (
       <Grid
       container
@@ -85,8 +85,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onChange:(action)=>(e)=>dispatch(onInputChange({type:action,value:e.target.value})),
     onLogin: (userName, password) => (e) => {
-      console.log(userName);
-      console.log(password);
+      //console.log(userName);
+      //console.log(password);
       dispatch(applicationLogin(userName, password))
     }
   }

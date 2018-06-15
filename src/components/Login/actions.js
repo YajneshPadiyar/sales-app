@@ -1,8 +1,8 @@
-import { APPLICATION_LOGIN, APPLICATION_LOGOUT } from './constants';
+import { APPLICATION_LOGIN, APPLICATION_LOGOUT, LOGIN_URI } from './constants';
 import { AUTHENTICATE } from '../../constants/actionTypes';
 
 export const onInputChange=(action)=>{
-  console.log(action);
+  //console.log(action);
   return {
     type: action.type,
     VALUE: action.value
@@ -14,16 +14,16 @@ export const applicationLogin = (userName, password) => {
     type: AUTHENTICATE,
     USER_NAME : userName,
     PASSWORD : password,
-    error: false,
+    API_URI: LOGIN_URI
   }
 }
 
 
-export const performValidateLogin=(userName, password) =>{
-  console.log("validateLogin");
-  console.log(userName);
-  console.log(password);
-  if( userName === "A"){
+export const performValidateLogin=(response) =>{
+  //console.log("validateLogin");
+  //console.log(userName);
+  //console.log(password);
+  if( response.status){
     return {
       type : APPLICATION_LOGIN,
       APPLICATION_AUTH : true,

@@ -10,12 +10,14 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
+//import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
+
+import { getCustomerList } from './actions';
 
 const styles = theme => ({
   paper:{
@@ -24,24 +26,18 @@ const styles = theme => ({
 });
 
 class CustomerList extends Component{
+
+  componentWillMount(){
+    this.props.loadCustomer;
+  }
+
   render(){
 
-    const CustomerList = [
-      {Key:"1", CustomerName: "Test Name 1", TradingName: "Trading Name 1"},
-      {Key:"2", CustomerName: "Test Name 2", TradingName: "Trading Name 2"},
-      {Key:"3", CustomerName: "Test Name 3", TradingName: "Trading Name 3"},
-      {Key:"4", CustomerName: "Test Name 4", TradingName: "Trading Name 4"},
-      {Key:"5", CustomerName: "Test Name 5", TradingName: "Trading Name 5"},
-      {Key:"6", CustomerName: "Test Name 6", TradingName: "Trading Name 6"},
-      {Key:"7", CustomerName: "Test Name 7", TradingName: "Trading Name 7"},
-      {Key:"8", CustomerName: "Test Name 8", TradingName: "Trading Name 8"},
-      {Key:"9", CustomerName: "Test Name 9", TradingName: "Trading Name 9"},
-      {Key:"10", CustomerName: "Test Name 10", TradingName: "Trading Name 10"},
-    ];
+    const CustListAPI = this.props.CustomerList;
 
-    const CustList = CustomerList.map(item=>{
+    const CustList = CustListAPI.map(item=>{
       return (
-        <ListItem key={item.key} divider>
+        <ListItem key={item.Key} divider>
           <ListItemAvatar>
             <Avatar>
               <AccountCircle/>
@@ -74,13 +70,14 @@ class CustomerList extends Component{
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => (
+  {CustomerList : state.Customers.CustomerList}
+);
 
-});
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    loadCustomer: dispatch(getCustomerList())
   };
 }
 

@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import CreateCustomer from './CreateCustomer';
 import CustomerList from './CustomerList';
-import {onInputChange} from './actions';
+//import {onInputChange} from './actions';
 const styles = theme => ({
   root: {
     display: 'flex',

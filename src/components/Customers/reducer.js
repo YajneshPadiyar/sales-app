@@ -4,8 +4,8 @@ import {
   CHANGE_LAST_NAME,
   CHANGE_TRADING_NAME,
   CHANGE_ADDRESS,
-  CHANGE_TRADE_ACCNT_NAME
-
+  CHANGE_TRADE_ACCNT_NAME,
+  UPDATE_CUSTOMER_LIST
 } from './constants';
 
 
@@ -15,11 +15,12 @@ const initialState ={
   LastName: "",
   TradingName: "",
   TradeAccntNum: "",
-  Address: ""
+  Address: "",
+  CustomerList: [],
 }
 
 
-export default (state={}, action) => {
+export default (state=initialState, action) => {
 
   switch (action.type){
     case CHANGE_FIRST_NAME:
@@ -34,6 +35,8 @@ export default (state={}, action) => {
       return {...state, TradeAccntNumName: action.VALUE};
     case CHANGE_ADDRESS:
       return {...state, Address: action.VALUE};
+    case UPDATE_CUSTOMER_LIST:
+      return {...state, CustomerList: [...action.VALUE]};
     default:
     return state;
   }
