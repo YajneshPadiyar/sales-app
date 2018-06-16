@@ -1,94 +1,91 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+//import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
-import { USER_NAME_CHANGE, PASSWORD_CHANGE} from './constants';
-import { onInputChange, applicationLogin } from './actions';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+//mport Button from '@material-ui/core/Button';
+
+import { STATE_LOGIN, STATE_FORGOT, STATE_REGISTER } from './constants';
+import { changeLoginView } from './actions';
+import LoginForm from './LoginForm';
+import RegisterUser from './RegisterUser';
+import ForgotUser from './ForgotUser';
+
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  wrapper: {
-    minWidth: 600,
-  },
-  paper: {
-    margin: theme.spacing.unit,
-    padding: theme.spacing.unit * 2,
-    minWidth: 400,
-    minHeight: 200,
-    marginTop: '20%'
+  anchor: {
+    cursor: "pointer",
+    color: theme.palette.primary.main,
+    marginRight: 5,
+    '&:hover':{
+      textDecoration: "underline",
+      fontWeight: "bold",
+    }
   }
 });
 
 
 class Login extends Component{
+
   render(){
-  //console.log(this.props);
+    const viewType = this.props.ComponentView;
+    const {classes} = this.props;
+    //console.log(viewType===STATE_LOGIN);
+    //console.log(viewType);
+    //console.log(STATE_LOGIN);
+    //console.log(this.props);
+  const switchComponentView = (type) => {
+    switch (type){
+      case STATE_LOGIN:
+        return (<LoginForm/>);
+      case STATE_FORGOT:
+        return <ForgotUser/>;
+      case STATE_REGISTER:
+        return <RegisterUser/>;
+      default:
+        return <LoginForm/>;
+    }
+  }
     return (
       <Grid
       container
       justify="center"
       //className={this.props.classes.wrapper}
       >
-      <Paper className={this.props.classes.paper} >
-      <Grid
-        container
-        className={this.props.classes.root}
-        spacing={16}
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
-        <TextField
-        id="UserName"
-        label="User Name"
-        onChange={this.props.onChange(USER_NAME_CHANGE)}
-        margin="normal"
-        />
-        <TextField
-          id="Password"
-          label="Password"
-          onChange={this.props.onChange(PASSWORD_CHANGE)}
-          margin="normal"
-          type="password"
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.props.onLogin(this.props.USER_NAME, this.props.PASSWORD)}
-          >
-          Login
-          </Button>
-      </Grid>
-      </Paper>
+      {switchComponentView(viewType)}
+      <span
+        className={classes.anchor}
+        onClick={this.props.loginViewChange(STATE_FORGOT)}
+        hidden={viewType === STATE_FORGOT}
+      >Forgot Password</span>
+      <span
+        className={classes.anchor}
+        onClick={this.props.loginViewChange(STATE_REGISTER)}
+        hidden={viewType === STATE_REGISTER}
+      >Register user</span>
+      <span
+        className={classes.anchor}
+        onClick={this.props.loginViewChange(STATE_LOGIN)}
+        hidden={viewType === STATE_LOGIN}
+      >Login</span>
       </Grid>
     );
   }
 }
 
 Login.propTypes = {
-  LOGIN_NAME : PropTypes.string,
-  PASSWORD : PropTypes.string,
-  onChange : PropTypes.func,
-  onLogin : PropTypes.func
+  ComponentView: PropTypes.string.isRequired
 }
 
-const mapStateToProps = (state) => ({...state.Login});
+const mapStateToProps = state => ({
+  ComponentView: state.Login.COMPONENT_VIEW
+});
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChange:(action)=>(e)=>dispatch(onInputChange({type:action,value:e.target.value})),
-    onLogin: (userName, password) => (e) => {
-      //console.log(userName);
-      //console.log(password);
-      dispatch(applicationLogin(userName, password))
-    }
+    loginViewChange: (type) => (e) => dispatch(changeLoginView(type))
   }
 };
 

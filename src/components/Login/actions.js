@@ -1,4 +1,9 @@
-import { APPLICATION_LOGIN, APPLICATION_LOGOUT, LOGIN_URI } from './constants';
+import {
+  APPLICATION_LOGIN,
+  APPLICATION_LOGOUT,
+  LOGIN_URI,
+  LOGIN_STATE_CHANGE,
+ } from './constants';
 import { AUTHENTICATE } from '../../constants/actionTypes';
 
 export const onInputChange=(action)=>{
@@ -18,7 +23,14 @@ export const applicationLogin = (userName, password) => {
   }
 }
 
-
+export const applicationRegister  = (action) => {
+  return {
+    type: AUTHENTICATE,
+    USER_NAME : action.USER_NAME,
+    PASSWORD : action.PASSWORD,
+    API_URI: LOGIN_URI
+  }
+}
 export const performValidateLogin=(response) =>{
   //console.log("validateLogin");
   //console.log(userName);
@@ -34,5 +46,12 @@ export const performValidateLogin=(response) =>{
       type : APPLICATION_LOGOUT,
       APPLICATION_AUTH : false
     };
+  }
+}
+
+export const changeLoginView = (type) => {
+    return {
+      type: LOGIN_STATE_CHANGE,
+      VALUE: type
   }
 }
