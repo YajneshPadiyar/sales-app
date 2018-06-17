@@ -30,7 +30,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     minWidth: 400,
     minHeight: 200,
-    marginTop: '20%'
+    marginTop: '10%'
   }
 });
 
