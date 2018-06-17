@@ -1,31 +1,13 @@
-import {  put,  takeLatest } from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga/effects'
+
 import { AUTHENTICATE } from './constants/actionTypes';
-import { performValidateLogin } from './components/Login/actions';
-//import {
-//LOGIN_USER_NAME,
-//LOGIN_PASSWORD,
-//} from './container/LoginPage/constants';
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* validateLogin(action) {
-  console.log("Worker Saga ");
-  console.log(action);
-  try {
-      //const user = yield call(Api.fetchUser, action.payload.userId);
-      yield put(performValidateLogin(action.USER_NAME, action.PASSWORD));
-   } catch (e) {
-      yield put(performValidateLogin(action.USER_NAME, action.PASSWORD));
-   }
-}
+import { GET_CUSTOMER_LIST } from './components/Customers/constants';
 
+import { validateLogin } from './components/Login/sagaMethods';
+import { getListOfCustomers } from './components/Customers/sagaMethods';
 
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
 export default function* mySaga() {
-  console.log("mySaga");
+  //console.log("mySaga");
   yield takeLatest(AUTHENTICATE, validateLogin);
+  yield takeLatest(GET_CUSTOMER_LIST, getListOfCustomers);
 }
