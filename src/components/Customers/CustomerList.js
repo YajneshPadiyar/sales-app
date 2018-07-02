@@ -40,15 +40,15 @@ class CustomerList extends Component{
 
     const CustList = CustListAPI.map(item=>{
       return (
-        <ListItem key={item.Key} divider>
+        <ListItem key={item.REF_ID} divider>
           <ListItemAvatar>
             <Avatar>
               <AccountCircle/>
             </Avatar>
           </ListItemAvatar>
           <ListItemText
-            primary={item.CustomerName}
-            secondary={item.TradingName}
+            primary={item.FIRST_NAME+" "+item.LAST_NAME}
+            secondary={item.TRADING_NUM+":"+item.TRADING_NAME+", "+item.LINE_ID}
           />
           <ListItemSecondaryAction>
             <IconButton aria-label="Delete">

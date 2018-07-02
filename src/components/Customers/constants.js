@@ -7,7 +7,10 @@ export const CHANGE_TRADE_ACCNT_NAME = "CHANGE_TRADE_ACCNT_NAME";
 export const CHANGE_ADDRESS = "CHANGE_ADDRESS";
 export const UPDATE_CUSTOMER_LIST = "UPDATE_CUSTOMER_LIST";
 export const GET_CUSTOMER_LIST = "GET_CUSTOMER_LIST";
+export const ADD_CUSTOMER_COMPLETE = "ADD_CUSTOMER_COMPLETE";
+export const ADD_CUSTOMER = "ADD_CUSTOMER";
 
 
 //api URI
-export const GET_CUSTOMER_URI = "/users/customer";
+export const GET_CUSTOMER_URI = "/getCustomers";
+export const ADD_CUSTOMER_URI = "/addCustomer";

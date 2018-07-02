@@ -5,17 +5,18 @@ import {
   CHANGE_TRADING_NAME,
   CHANGE_ADDRESS,
   CHANGE_TRADE_ACCNT_NAME,
-  UPDATE_CUSTOMER_LIST
+  UPDATE_CUSTOMER_LIST,
+  ADD_CUSTOMER_COMPLETE
 } from './constants';
 
 
 const initialState ={
-  FirstName: "",
-  MiddleName: "",
-  LastName: "",
-  TradingName: "",
-  TradeAccntNum: "",
-  Address: "",
+    FirstName: "",
+    MiddleName: "",
+    LastName: "",
+    TradingName: "",
+    TradeAccntNum: "",
+    Address: "",
   CustomerList: [],
 }
 
@@ -28,15 +29,17 @@ export default (state=initialState, action) => {
     case CHANGE_LAST_NAME:
       return {...state, LastName: action.VALUE};
     case CHANGE_MIDDLE_NAME:
-      return {...state, MiddlName: action.VALUE};
+      return {...state, MiddleName: action.VALUE};
     case CHANGE_TRADING_NAME:
       return {...state, TradingName: action.VALUE};
     case CHANGE_TRADE_ACCNT_NAME:
-      return {...state, TradeAccntNumName: action.VALUE};
+      return {...state, TradeAccntNum: action.VALUE};
     case CHANGE_ADDRESS:
       return {...state, Address: action.VALUE};
     case UPDATE_CUSTOMER_LIST:
       return {...state, CustomerList: [...action.VALUE]};
+    case ADD_CUSTOMER_COMPLETE:
+      return state;
     default:
     return state;
   }
