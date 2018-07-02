@@ -5,7 +5,8 @@ import {
   LOGIN,
   REGISTER,
   APPLICATION_LOGIN,
-  APP_GOTO_PAGE
+  APP_GOTO_PAGE,
+  APP_UPDATE_TITLE
 } from '../constants/actionTypes';
 
 const defaultState = {
@@ -41,6 +42,11 @@ export default (state = defaultState, action) => {
       ...state,
       redirectTo: action.path
     };
+    case APP_UPDATE_TITLE:
+    return {
+      ...state,
+      appName: action.newTitle
+    }
     default:
       return state;
   }

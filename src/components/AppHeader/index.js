@@ -11,7 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ApplicationMenu from '../ApplicationMenu';
 import { onMenuChange, onMenuClick } from './actions';
 
-import { APP_TITLE_LIST } from './constants';
+import { APP_HEADER_TITLE_LIST } from './constants';
 
 const styles = {
   root: {
@@ -57,7 +57,7 @@ class AppHeader extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              {APP_TITLE_LIST[this.props.pathname]}
+              {APP_HEADER_TITLE_LIST[this.props.pathname]}
             </Typography>
           </Toolbar>
         </AppBar>
