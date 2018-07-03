@@ -3,14 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 
 import CreateZones from './CreateZones';
+import ZoneList from './ZoneList';
 
 const styles = theme => ({
   root: {
@@ -38,11 +34,12 @@ class Zones extends Component {
         spacing={24}
         direction="row"
       >
-          <Grid
-            className={classes.gridItem}
-          >
-            <CreateZones/>
-          </Grid>
+        <Grid className={classes.gridItem}>
+          <CreateZones/>
+        </Grid>
+        <Grid className={classes.gridItem}>
+          <ZoneList/>
+        </Grid>
       </Grid>
     );
   }

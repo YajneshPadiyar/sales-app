@@ -52,6 +52,7 @@ class AppHeader extends React.Component {
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
+              //hidden={!this.props.authStatus}
               onClick={this.props.menuClick}
               >
               <MenuIcon />
@@ -73,7 +74,11 @@ AppHeader.propTypes = {
 };
 
 const mapStatesToProps = state => (
-  {...state.AppHeader, pathname:state.router.location.pathname}
+  {...state.AppHeader,
+    pathname: state.router.location.pathname,
+    authStatus: false
+  }
+
 );
 const mapDispatchToProps = dispatch => {
   return {

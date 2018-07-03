@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -9,6 +10,23 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+
+import {
+  zoneNameSelector,
+  zoneAddressSelector
+} from './selectors';
+
+import {
+  CHANGE_ZONE_ADDR,
+  CHANGE_ZONE_NAME,
+  ZONE_TYPE,
+  STATUS_ACTIVE
+} from './constants';
+
+import {
+  onInputChange,
+  onCreateZone
+} from './actions';
 
 const styles = theme => ({
   root: {
@@ -41,9 +59,10 @@ const styles = theme => ({
   }
 });
 
-class CreateZones extends Component {
+class CreateZone extends Component {
   render() {
     const {classes}=this.props;
+    //console.log(this.props);
     return(
       <Grid
         container
@@ -78,13 +97,17 @@ class CreateZones extends Component {
               id="ZoneName"
               label="Zone Name"
               className={classes.textField}
+              onChange={this.props.onChangeEvent(CHANGE_ZONE_NAME)}
               type="text"
+              value={this.props.ZONE_NAME}
               />
               <TextField
               id="ZoneAddressDetails"
               label="Zone Address"
               className={classes.textField}
+              onChange={this.props.onChangeEvent(CHANGE_ZONE_ADDR)}
               type="text"
+              value={this.props.ZONE_ADDR}
               />
             </Grid>
             <Grid
@@ -99,6 +122,13 @@ class CreateZones extends Component {
                 variant="contained"
                 color="primary"
                 className={classes.button}
+                onClick={this.props.onCreateZone({
+                  ZONE_NAME: this.props.ZONE_NAME,
+                  ZONE_ADDR: this.props.ZONE_ADDR,
+                  ZONE_TYPE: ZONE_TYPE,
+                  CREATED: new Date(),
+                  STATUS: STATUS_ACTIVE
+                })}
               >Create Zone</Button>
             </Grid>
           </Grid>
@@ -108,8 +138,17 @@ class CreateZones extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => {};
+const mapStateToProps = createStructuredSelector ({
+  ZONE_NAME: zoneNameSelector(),
+  ZONE_ADDR: zoneAddressSelector()
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateZones));
+const mapDispatchToProps = dispatch => {
+  return{
+    onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value})),
+    onCreateZone: (data) => (e) => dispatch(onCreateZone(data)),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateZone));

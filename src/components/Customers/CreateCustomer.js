@@ -63,7 +63,7 @@ const styles = theme => ({
 
 class CreateCustomer extends Component{
   render(){
-    console.log(this.props);
+    //console.log(this.props);
     const {classes}=this.props;
     return(
       <Grid
