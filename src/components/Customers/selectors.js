@@ -1,6 +1,12 @@
 import { createSelector } from 'reselect';
 
 const customerState = state => state.Customers;
+const homeState = state => state.Home;
+
+const zoneIdSelector = () => createSelector(
+  homeState,
+  (home) => home.ZONE_ID.toString()
+);
 
 const firstNameSelector = () => createSelector(
   customerState,
@@ -35,5 +41,6 @@ export {
   tradingNameSelector,
   lastNameSelector,
   middleNameSelector,
-  firstNameSelector
+  firstNameSelector,
+  zoneIdSelector
 };

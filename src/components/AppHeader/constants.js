@@ -5,6 +5,7 @@ export const MENU_CHANGE = "MENU_CHANGE";
 export const APP_HEADER_TITLE_LIST = {
   "/": "Welcome to Your Sales Application",
   "/home": "Home Page",
+  "/order": "Start Your Order !!",
   "/customers": "Manage Customer",
   "/sales": "Sales Management",
   "/zones": "Zone Management"
@@ -13,6 +14,7 @@ export const APP_HEADER_TITLE_LIST = {
 //Application title
 export const APP_TITLE_LIST = {
   "/": "Welcome ! Sales Applicaiton",
+  "/order": "Order Page",
   "/home": "Home Page",
   "/customers": "Manage Customer",
   "/sales": "Sales Management",

@@ -14,7 +14,6 @@ const initialState = {
 
 
 export default (state=initialState, action) => {
-
   switch (action.type){
     case CHANGE_ZONE_NAME:
     return {...state, ZONE_NAME: action.VALUE};
@@ -27,4 +26,8 @@ export default (state=initialState, action) => {
     default:
     return state;
   }
+}
+
+const setDefaultZone = (ZoneList) => {
+
 }

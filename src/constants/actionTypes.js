@@ -43,6 +43,7 @@ export const APP_UPDATE_TITLE = "APP_UPDATE_TITLE";
 
 
 export const HOME_PAGE_PATH = "/home";
+export const ORDER_PAGE_PATH = "/order";
 export const CUSTOMER_PAGE_PATH = "/customers";
 export const DEFAULT_PATH = "/";
 export const SALES_PAGE_PATH = "/sales";

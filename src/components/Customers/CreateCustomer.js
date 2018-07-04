@@ -24,12 +24,14 @@ import {
   addCustomer
 } from './actions';
 
-import { addressSelector,
-tradingAccntNumSelector,
-tradingNameSelector,
-lastNameSelector,
-middleNameSelector,
-firstNameSelector } from './selectors';
+import {
+  addressSelector,
+  tradingAccntNumSelector,
+  tradingNameSelector,
+  lastNameSelector,
+  middleNameSelector,
+  firstNameSelector,
+  zoneIdSelector } from './selectors';
 
 const styles = theme => ({
   root: {
@@ -174,7 +176,7 @@ class CreateCustomer extends Component{
                   TRADING_NUM: this.props.TRADING_NUM,
                   ADDRESS: this.props.ADDRESS,
                   CREATED: new Date(),
-                  LINE_ID: "A001"
+                  LINE_ID: this.props.ZONE_ID
                 }
               )}
             >
@@ -195,7 +197,8 @@ const mapStateToProps = createStructuredSelector({
   LAST_NAME: lastNameSelector(),
   TRADING_NAME: tradingNameSelector(),
   TRADING_NUM: tradingAccntNumSelector(),
-  ADDRESS: addressSelector()
+  ADDRESS: addressSelector(),
+  ZONE_ID: zoneIdSelector(),
 });
 
 const mapDispatchToProps = dispatch => {

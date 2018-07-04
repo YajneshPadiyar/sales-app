@@ -6,6 +6,7 @@ import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 
 import Home from './Home';
+import Order from './Order';
 import Login from './Login';
 import Customers from './Customers';
 import Sales from './Sales';
@@ -16,6 +17,7 @@ import { push } from 'react-router-redux';
 
 import {
   HOME_PAGE_PATH,
+  ORDER_PAGE_PATH,
   CUSTOMER_PAGE_PATH,
   DEFAULT_PATH,
   SALES_PAGE_PATH,
@@ -75,6 +77,7 @@ class App extends React.Component {
             <Switch>
             <Route exact path={DEFAULT_PATH} component={Login}/>
             <Route path={HOME_PAGE_PATH} component={Home} />
+            <Route path={ORDER_PAGE_PATH} component={Order} />
             <Route path={CUSTOMER_PAGE_PATH} component={Customers} />
             <Route path={SALES_PAGE_PATH} component={Sales} />
             <Route path={ZONE_PAGE_PATH} component={Zones} />

@@ -17,6 +17,7 @@ const initialState = {
   FIRST_NAME: "",
   LAST_NAME: "",
   EMAIL: "",
+  DEFAULT_ZONE_ID: 1002,
   COMPONENT_VIEW: STATE_LOGIN
 }
 export default (state=initialState, action) => {
