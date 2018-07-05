@@ -67,7 +67,7 @@ class ZoneList extends Component {
     });
 
     return(
-      <Paper className={classes.paperr}>
+      <Paper className={classes.paper}>
         <TextField
           lable="Search Zone"
           type="text"

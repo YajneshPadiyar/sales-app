@@ -21,8 +21,13 @@ import { ZONE_TYPE } from './constants';
 
 const styles = theme => ({
   paper:{
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    position: 'relative',
+    overflow: 'auto',
     minWidth: 400,
-    maxHeight: 670,
+    maxHeight: 300,
+    maxWidth: 360,
     overflow: 'scroll',
     overflowX: 'hidden',
   }
@@ -57,7 +62,7 @@ class ZoneList extends Component {
 
     const {classes}=this.props;
     return(
-      <Paper className={classes.paperr}>
+      <Paper className={classes.paper}>
         <TextField
           lable="Search Zone"
           type="text"
