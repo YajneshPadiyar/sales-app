@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
+import ProductList from './ProductList';
 const styles = theme => ({});
 
 class Products extends Component{
   render(){
     return (
-      <div>Home</div>
+      <ProductList/>
     );
   }
 }

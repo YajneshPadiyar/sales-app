@@ -14,7 +14,7 @@ export const APP_HEADER_TITLE_LIST = {
 
 //Application title
 export const APP_TITLE_LIST = {
-  "/": "Welcome ! Sales Applicaiton",
+  "/": "Welcome ! Sales Application",
   "/order": "Order Page",
   "/home": "Home Page",
   "/customers": "Manage Customer",
