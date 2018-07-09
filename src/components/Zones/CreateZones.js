@@ -138,6 +138,10 @@ class CreateZone extends Component {
   }
 }
 
+CreateZone.propTypes= {
+  ZONE_NAME: PropTypes.string,
+  ZONE_ADDR: PropTypes.string,
+}
 
 const mapStateToProps = createStructuredSelector ({
   ZONE_NAME: zoneNameSelector(),

@@ -45,6 +45,9 @@ class Zones extends Component {
   }
 }
 
+Zones.propTypes = {
+  classes: PropTypes.object
+}
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => {};

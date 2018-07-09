@@ -27,7 +27,3 @@ export default (state=initialState, action) => {
     return state;
   }
 }
-
-const setDefaultZone = (ZoneList) => {
-
-}

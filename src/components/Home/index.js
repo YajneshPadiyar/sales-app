@@ -41,6 +41,9 @@ class Home extends Component{
   }
 }
 
+Home.propTypes = {
+  classes: PropTypes.object,
+}
 const mapStateToProps = (state) => {
 
 };

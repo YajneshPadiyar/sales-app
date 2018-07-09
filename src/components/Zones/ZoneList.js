@@ -75,6 +75,10 @@ class ZoneList extends Component {
   }
 }
 
+ZoneList.propTypes = {
+  classes: PropTypes.object,
+}
+
 const mapStateToProps = state => ({
   ZoneList: state.Zones.ZONE_LIST
 });
