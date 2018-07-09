@@ -11,6 +11,7 @@ import Login from './Login';
 import Customers from './Customers';
 import Sales from './Sales';
 import Zones from './Zones';
+import Products from './Products';
 
 import { store } from '../store';
 import { push } from 'react-router-redux';
@@ -22,7 +23,8 @@ import {
   DEFAULT_PATH,
   SALES_PAGE_PATH,
   ZONE_PAGE_PATH,
-  APP_UPDATE_TITLE
+  APP_UPDATE_TITLE,
+  PRODUCT_PAGE_PATH
 } from '../constants/actionTypes';
 
 import { APP_TITLE_LIST } from './AppHeader/constants';
@@ -81,6 +83,7 @@ class App extends React.Component {
             <Route path={CUSTOMER_PAGE_PATH} component={Customers} />
             <Route path={SALES_PAGE_PATH} component={Sales} />
             <Route path={ZONE_PAGE_PATH} component={Zones} />
+            <Route path={PRODUCT_PAGE_PATH} component={Products} />
             </Switch>
         </div>
       );

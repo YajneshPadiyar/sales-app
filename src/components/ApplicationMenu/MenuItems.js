@@ -6,7 +6,8 @@ import {
   DEFAULT_PATH,
   SALES_PAGE_PATH,
   ZONE_PAGE_PATH,
-  ORDER_PAGE_PATH
+  ORDER_PAGE_PATH,
+  PRODUCT_PAGE_PATH,
 } from '../../constants/actionTypes';
 
 const Items = () => {
@@ -17,6 +18,7 @@ const Items = () => {
     { name: "Customers", key: "Customers", icon: <InboxIcon />, path: CUSTOMER_PAGE_PATH },
     { name: "Sales List", key: "Sales", icon: <InboxIcon />, path: SALES_PAGE_PATH },
     { name: "Zones", key: "Zones", icon: <InboxIcon />, path: ZONE_PAGE_PATH },
+    { name: "Products", key: "Products", icon: <InboxIcon />, path: PRODUCT_PAGE_PATH },
     { type: "Divider", key: "DecondSection"},
     { name: "Logout", key: "Logout", icon: <InboxIcon />, path: DEFAULT_PATH}
   ]);

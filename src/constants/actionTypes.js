@@ -48,3 +48,4 @@ export const CUSTOMER_PAGE_PATH = "/customers";
 export const DEFAULT_PATH = "/";
 export const SALES_PAGE_PATH = "/sales";
 export const ZONE_PAGE_PATH = "/zones";
+export const PRODUCT_PAGE_PATH = "/products";
