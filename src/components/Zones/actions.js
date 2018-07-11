@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 
-const getZoneList = (data) => {
+export const getZoneList = (data) => {
   return {
     type: GET_ZONE_LIST,
     API_URI: GET_ZONE_URI,
@@ -16,14 +16,14 @@ const getZoneList = (data) => {
   }
 }
 
-const onInputChange = (action) => {
+export const onInputChange = (action) => {
   return {
     type: action.type,
     VALUE: action.value
   };
 }
 
-const onCreateZone = (data) => {
+export const onCreateZone = (data) => {
   return {
     type: CREATE_ZONE,
     API_URI: CREATE_ZONE_URI,
@@ -31,7 +31,7 @@ const onCreateZone = (data) => {
   };
 }
 
-const createZoneComplete = (response) => {
+export const createZoneComplete = (response) => {
   if(response.status){
     return {
       type: RESET_ZONE_FORM
@@ -43,7 +43,7 @@ const createZoneComplete = (response) => {
   }
 }
 
-const updateZoneList = (response) => {
+export const updateZoneList = (response) => {
   if(response.status){
     return {
       type: UPDATE_ZONE_LIST,
@@ -56,11 +56,3 @@ const updateZoneList = (response) => {
     }
   }
 }
-
-export {
-  getZoneList,
-  onInputChange,
-  onCreateZone,
-  createZoneComplete,
-  updateZoneList
-};
