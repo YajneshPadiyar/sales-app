@@ -2,18 +2,17 @@ import { createSelector } from 'reselect';
 
 const zoneState = state => state.Zones;
 
-const zoneNameSelector = () => createSelector(
+export const zoneNameSelector = ()=> createSelector(
   zoneState,
   (zone) => zone.ZONE_NAME
 );
 
-const zoneAddressSelector = () => createSelector(
+export const zoneAddressSelector = () => createSelector(
   zoneState,
   (zone) => zone.ZONE_ADDR
 );
 
-
-export {
-  zoneNameSelector,
-  zoneAddressSelector
-};
+export const zoneListSelector = () => createSelector(
+  zoneState,
+  (zone) => zone.ZONE_LIST
+);

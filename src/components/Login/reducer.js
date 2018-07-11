@@ -19,7 +19,7 @@ const initialState = {
   EMAIL: "",
   DEFAULT_ZONE_ID: 1002,
   COMPONENT_VIEW: STATE_LOGIN
-}
+};
 export default (state=initialState, action) => {
   switch (action.type){
     case USER_NAME_CHANGE:

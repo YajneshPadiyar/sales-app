@@ -155,4 +155,5 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
+//console.log(mapStateToProps);
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateZone));

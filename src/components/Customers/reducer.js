@@ -22,7 +22,7 @@ const initialState ={
 
 
 export default (state=initialState, action) => {
-
+  //console.log(action);
   switch (action.type){
     case CHANGE_FIRST_NAME:
       return {...state, FirstName: action.VALUE};

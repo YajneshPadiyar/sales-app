@@ -31,7 +31,7 @@ const styles = theme => ({
 class CustomerList extends Component{
 
   componentWillMount(){
-    this.props.loadCustomer();
+    this.props.loadCustomer;
   }
 
   render(){

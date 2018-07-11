@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import ProductList from './ProductList';
+import AddProduct from './AddProduct';
 const styles = theme => ({});
 
 class Products extends Component{
   render(){
     return (
-      <ProductList/>
+      <AddProduct/>
     );
   }
 }

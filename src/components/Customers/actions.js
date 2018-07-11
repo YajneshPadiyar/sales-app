@@ -17,7 +17,7 @@ export const onInputChange=(action)=>{
 
 
 export const updateCustomerList = (response) => {
-//  console.log(response);
+//console.log(response);
 if(response.status){
   return {
     type: UPDATE_CUSTOMER_LIST,
@@ -45,7 +45,7 @@ export const addCustomer = (data) => {
 }
 
 export const addedCustomer = (response) =>{
-  console.log(response);
+  //console.log(response);
   if(response.status){
     return {
       type: ADD_CUSTOMER_COMPLETE

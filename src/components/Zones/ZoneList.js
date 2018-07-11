@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +19,8 @@ import IconButton from '@material-ui/core/IconButton';
 import { getZoneList } from './actions';
 
 import { ZONE_TYPE } from './constants';
+
+import { zoneListSelector } from './selectors';
 
 const styles = theme => ({
   paper:{
@@ -38,6 +41,7 @@ class ZoneList extends Component {
     this.props.loadZone({ZONE_TYPE: ZONE_TYPE});
   }
   render() {
+    //console.log(this.props);
     const ZoneListAPI = this.props.ZoneList;
     const ZoneList = ZoneListAPI.map(item=>{
       return (
@@ -79,14 +83,15 @@ ZoneList.propTypes = {
   classes: PropTypes.object,
 }
 
-const mapStateToProps = state => ({
-  ZoneList: state.Zones.ZONE_LIST
+const mapStateToProps  = createStructuredSelector({
+  ZoneList: zoneListSelector()
 });
 
+//console.log(mapStateToProps());
 const mapDispatchToProps = dispatch => {
   return {
     loadZone:(data)=> dispatch(getZoneList(data))
   }
 };
-
+console.log(mapStateToProps);
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ZoneList));
