@@ -73,28 +73,28 @@ import { AUTHENTICATE } from '../../../constants/actionTypes';
     describe('performValidateLogin', () => {
 
         let status = true;
-
-        let expectedResult = {
-          type: APPLICATION_LOGIN,
-          APPLICATION_AUTH: status
-        };
-        let inputData = {
-          status: status
-        };
+        let expectedResult = {};
+        let inputData = {};
 
         it('should return correct type and auth status true', () => {
+          expectedResult =   {
+              type: APPLICATION_LOGIN,
+              APPLICATION_AUTH: status
+            };
+            inputData = {
+              status: status
+            };
           expect(performValidateLogin(inputData)).toEqual(expectedResult);
         });
-
-        status = false;
-        expectedResult = {
-          type: APPLICATION_LOGOUT,
-          APPLICATION_AUTH: status
-        };
-        inputData = {
-          status: status
-        };
         it('should return correct type and auth status false', () => {
+          status = false;
+          expectedResult = {
+            type: APPLICATION_LOGOUT,
+            APPLICATION_AUTH: status
+          };
+          inputData = {
+            status: status
+          };
           expect(performValidateLogin(inputData)).toEqual(expectedResult);
         });
     });
