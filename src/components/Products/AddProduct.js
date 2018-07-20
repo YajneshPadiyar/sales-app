@@ -10,15 +10,21 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import AddIcon from '@material-ui/icons/Add';
 
 import {
   productNameSelector,
-  productDescriptionSelector
+  productDescriptionSelector,
+  productWholePriceSelector,
+  productRetailPriceSelector,
+  enableAddProductSelector,
 } from './selectors';
 
 import {
   CHANGE_PRODUCT_DESC,
   CHANGE_PRODUCT_NAME,
+  CHANGE_WHOLE_PRICE,
+  CHANGE_RETAIL_PRICE,
   PRODUCT_TYPE,
   STATUS_ACTIVE
 } from './constants';
@@ -40,7 +46,8 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     minWidth: 400,
     minHeight: 200,
-    marginTop: '10%'
+    marginTop: '10%',
+    position: 'relative',
   },
   gridItem: {
     marginLeft: theme.spacing.unit,
@@ -56,13 +63,18 @@ const styles = theme => ({
   },
   typography: {
     margin: theme.spacing.unit,
-  }
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
+  },
 });
 
 class AddProduct extends Component {
   render() {
     const {classes}=this.props;
-    //console.log(this.props);
+    console.log(this.props);
     return(
       <Grid
         container
@@ -71,6 +83,11 @@ class AddProduct extends Component {
         spacing={24}
       >
         <Paper className={classes.paper}>
+        <div>
+          <Button variant="fab" color="primary" aria-label="Add" className={classes.button, classes.fab}>
+            <AddIcon />
+          </Button>
+        </div>
           <Grid
             container
             spacing={24}
@@ -85,7 +102,7 @@ class AddProduct extends Component {
                 gutterBottom
                 color="primary"
               >
-                Create Zone
+                Add Product
               </Typography>
             </Grid>
             <Divider />
@@ -101,6 +118,27 @@ class AddProduct extends Component {
               type="text"
               value={this.props.PRODUCT_NAME}
               />
+              <TextField
+              id="WholeSalePrice"
+              label="Whole Sale Price"
+              className={classes.textField}
+              onChange={this.props.onChangeEvent(CHANGE_WHOLE_PRICE)}
+              type="text"
+              value={this.props.PRODUCT_WHOLE_PRICE}
+              />
+              <TextField
+              id="RetailPrice"
+              label="Retail Price"
+              className={classes.textField}
+              onChange={this.props.onChangeEvent(CHANGE_RETAIL_PRICE)}
+              type="text"
+              value={this.props.PRODUCT_RETAIL_PRICE}
+              />
+            </Grid>
+            <Grid
+              item
+              className={classes.gridItem}
+            >
               <TextField
               id="ProdDescDetails"
               label="Product Description"
@@ -121,10 +159,12 @@ class AddProduct extends Component {
               <Button
                 variant="contained"
                 color="primary"
+                disabled={this.props.ENABLE_ADD_PRODUCT}
                 className={classes.button}
                 onClick={this.props.onCreateProduct({
                   PRODUCT_NAME: this.props.PRODUCT_NAME,
                   PRODUCT_DESC: this.props.PRODUCT_DESC,
+
                   PRODUCT_TYPE: PRODUCT_TYPE,
                   CREATED: new Date(),
                   STATUS: STATUS_ACTIVE
@@ -145,7 +185,10 @@ AddProduct.propTypes= {
 
 const mapStateToProps = createStructuredSelector ({
   PRODUCT_NAME: productNameSelector(),
-  PRODUCT_DESC: productDescriptionSelector()
+  PRODUCT_DESC: productDescriptionSelector(),
+  PRODUCT_WHOLE_PRICE: productWholePriceSelector(),
+  PRODUCT_RETAIL_PRICE: productRetailPriceSelector(),
+  ENABLE_ADD_PRODUCT: enableAddProductSelector(),
 });
 
 const mapDispatchToProps = dispatch => {

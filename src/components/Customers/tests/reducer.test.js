@@ -6,11 +6,14 @@ import {
   CHANGE_ADDRESS,
   CHANGE_TRADE_ACCNT_NAME,
   UPDATE_CUSTOMER_LIST,
-  ADD_CUSTOMER_COMPLETE
+  ADD_CUSTOMER_COMPLETE,
+  CHANGE_COMPONENT_LIST,
+  CHANGE_COMPONENT_ADD,
 } from '../constants';
 
 
 const initialState ={
+    CompState: CHANGE_COMPONENT_LIST,
     FirstName: "",
     MiddleName: "",
     LastName: "",
@@ -24,6 +27,7 @@ import {
   onInputChange,
   updateCustomerList,
   addedCustomer,
+  changeComponentView,
 } from '../actions';
 
 import reducer from '../reducer';
@@ -71,8 +75,20 @@ describe('Customer Reducer', () => {
   });
 
   it('Add Customer Complete', () => {
-    expectedResult = {...state};
+    expectedResult = {...state , CompState: CHANGE_COMPONENT_LIST};
     expect(reducer(state, addedCustomer({status:true}))).toEqual(expectedResult);
+  });
+
+  it('CHANGE_COMPONENT_LIST', () => {
+    expectedResult = {...state , CompState: CHANGE_COMPONENT_LIST};
+    expect(reducer(state, changeComponentView(CHANGE_COMPONENT_LIST)))
+    .toEqual(expectedResult);
+  });
+
+  it('CHANGE_COMPONENT_ADD', () => {
+    expectedResult = {...state , CompState: CHANGE_COMPONENT_ADD};
+    expect(reducer(state, changeComponentView(CHANGE_COMPONENT_ADD)))
+    .toEqual(expectedResult);
   });
 
 });

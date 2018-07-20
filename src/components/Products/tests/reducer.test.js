@@ -2,6 +2,8 @@ import {
   UPDATE_PRODUCT_LIST,
   CHANGE_PRODUCT_NAME,
   CHANGE_PRODUCT_DESC,
+  CHANGE_RETAIL_PRICE,
+  CHANGE_WHOLE_PRICE,
 } from '../constants';
 
 import {
@@ -14,6 +16,8 @@ import reducer from '../reducer';
 const initialState = {
   PRODUCT_NAME: "",
   PRODUCT_DESC: "",
+  PRODUCT_WHOLE_PRICE: 0,
+  PRODUCT_RETAIL_PRICE:  0,
   PRODUCT_LIST:[],
 }
 
@@ -37,6 +41,8 @@ describe('Products Reducer', () => {
   const testCases = [
     { name: "PRODUCT_NAME", testValue: "testValue", type: CHANGE_PRODUCT_NAME},
     { name: "PRODUCT_DESC", testValue: "testValue", type: CHANGE_PRODUCT_DESC},
+    { name: "PRODUCT_RETAIL_PRICE", testValue: "testValue", type: CHANGE_RETAIL_PRICE},
+    { name: "PRODUCT_WHOLE_PRICE", testValue: "testValue", type: CHANGE_WHOLE_PRICE},
   ];
 
   for(let testCase in testCases){

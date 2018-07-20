@@ -10,7 +10,7 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Conduit',
+  appName: 'Sales App',
   token: null,
   viewChangeCounter: 0
 };

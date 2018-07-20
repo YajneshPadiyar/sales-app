@@ -13,6 +13,7 @@ import {
   getCustomerList,
   addCustomer,
   addedCustomer,
+  changeComponentView
 } from '../actions';
 
 describe('Customer Actions', () => {
@@ -80,6 +81,11 @@ describe('Customer Actions', () => {
   it('addedCustomer failure', () => {
     const expectedResult = {type: ADD_CUSTOMER_COMPLETE};
     expect(addedCustomer({status: false})).toEqual(expectedResult);
+  });
+
+  it('changeComponentView', () => {
+    const expectedResult = {type: "X"};
+    expect(changeComponentView("X")).toEqual(expectedResult);
   });
 
 });

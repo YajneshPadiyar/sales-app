@@ -34,6 +34,23 @@ const addressSelector = () => createSelector(
   (customer) => customer.Address
 )
 
+const getCompStateSelector = () => createSelector(
+  customerState,
+  (customer) => customer.CompState
+)
+
+const enableCreateCustomer = () => createSelector(
+  customerState,
+  (customer) => {
+    const a = customer.FirstName.length>0;
+    const b = customer.LastName.length>0;
+    const c = customer.Address.length>0;
+    const d = customer.TradingName.length>0;
+    const e = customer.TradeAccntNum.length>0;
+    return !(a && b && c && d && e );
+  }
+)
+
 
 export {
   addressSelector,
@@ -42,5 +59,7 @@ export {
   lastNameSelector,
   middleNameSelector,
   firstNameSelector,
-  zoneIdSelector
+  zoneIdSelector,
+  enableCreateCustomer,
+  getCompStateSelector
 };

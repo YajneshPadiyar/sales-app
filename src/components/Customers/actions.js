@@ -7,6 +7,8 @@ import {
   ADD_CUSTOMER
 } from './constants';
 
+import cleanNullAttributes from '../../utils/customFunction/cleanNullAttributes';
+
 export const onInputChange=(action)=>{
   //console.log(action);
   return {
@@ -37,6 +39,7 @@ export const getCustomerList = () => {
 }
 
 export const addCustomer = (data) => {
+  data = cleanNullAttributes(data);
   return {
     type: ADD_CUSTOMER,
     API_URI: ADD_CUSTOMER_URI,
@@ -54,5 +57,11 @@ export const addedCustomer = (response) =>{
     return {
       type: ADD_CUSTOMER_COMPLETE
     };
+  }
+}
+
+export const changeComponentView = (type) => {
+  return {
+    type: type,
   }
 }

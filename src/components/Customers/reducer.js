@@ -6,11 +6,14 @@ import {
   CHANGE_ADDRESS,
   CHANGE_TRADE_ACCNT_NAME,
   UPDATE_CUSTOMER_LIST,
-  ADD_CUSTOMER_COMPLETE
+  ADD_CUSTOMER_COMPLETE,
+  CHANGE_COMPONENT_LIST,
+  CHANGE_COMPONENT_ADD,
 } from './constants';
 
 
 const initialState ={
+    CompState: CHANGE_COMPONENT_LIST,
     FirstName: "",
     MiddleName: "",
     LastName: "",
@@ -39,7 +42,11 @@ export default (state=initialState, action) => {
     case UPDATE_CUSTOMER_LIST:
       return {...state, CustomerList: [...action.VALUE]};
     case ADD_CUSTOMER_COMPLETE:
-      return state;
+      return {...state, CompState: CHANGE_COMPONENT_LIST};
+    case CHANGE_COMPONENT_ADD:
+      return {...state, CompState: CHANGE_COMPONENT_ADD};
+    case CHANGE_COMPONENT_LIST:
+      return {...state, CompState: CHANGE_COMPONENT_LIST};
     default:
     return state;
   }

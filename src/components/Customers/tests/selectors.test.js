@@ -5,7 +5,9 @@ import {
   lastNameSelector,
   middleNameSelector,
   firstNameSelector,
-  zoneIdSelector
+  zoneIdSelector,
+  enableCreateCustomer,
+  getCompStateSelector,
 } from '../selectors';
 
 describe('customer selectors', () =>{
@@ -17,6 +19,7 @@ describe('customer selectors', () =>{
     {name: "lastNameSelector", selector: lastNameSelector(), testValue: "testValue", select: "LastName", comp: "Customers"},
     {name: "middleNameSelector", selector: middleNameSelector(), testValue: "testValue", select: "MiddleName", comp: "Customers"},
     {name: "firstNameSelector", selector: firstNameSelector(), testValue: "testValue", select: "FirstName", comp: "Customers"},
+    {name: "getCompStateSelector", selector: getCompStateSelector(), testValue: "testValue", select: "CompState", comp: "Customers"},
     {name: "zoneIdSelector", selector: zoneIdSelector(), testValue: "testValue", select: "ZONE_ID", comp: "Home"},
   ];
 
@@ -33,4 +36,34 @@ describe('customer selectors', () =>{
       expect(Tselector(mockedState)).toEqual(expectedResult);
     });
   }
+
+  it('should enable crerate customer', () => {
+    const Tselector = enableCreateCustomer();
+    const mockedState = {
+      Customers: {
+        FirstName: "AB",
+        LastName: "CD",
+        Address: "EF",
+        TradingName: "GH",
+        TradeAccntNum: "wewr"
+      }
+    }
+    expect(Tselector(mockedState)).toBeFalsy();
+  });
+
+  it('should disable crerate customer', () => {
+    const Tselector = enableCreateCustomer();
+    const mockedState = {
+      Customers: {
+        FirstName: "",
+        LastName: "",
+        Address: "",
+        TradingName: "",
+        TradeAccntNum: ""
+      }
+    }
+    expect(Tselector(mockedState)).toBeTruthy();
+  });
+
+
 });

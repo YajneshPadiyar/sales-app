@@ -16,12 +16,13 @@ import {
   CHANGE_LAST_NAME,
   CHANGE_TRADING_NAME,
   CHANGE_ADDRESS,
-  CHANGE_TRADE_ACCNT_NAME
-
+  CHANGE_TRADE_ACCNT_NAME,
+  CHANGE_COMPONENT_LIST,
 } from './constants';
 import {
   onInputChange,
-  addCustomer
+  addCustomer,
+  changeComponentView,
 } from './actions';
 
 import {
@@ -31,7 +32,9 @@ import {
   lastNameSelector,
   middleNameSelector,
   firstNameSelector,
-  zoneIdSelector } from './selectors';
+  zoneIdSelector,
+  enableCreateCustomer,
+} from './selectors';
 
 const styles = theme => ({
   root: {
@@ -160,13 +163,16 @@ class CreateCustomer extends Component{
             item
             className={classes.gridItem}
           >
-            <Button variant="contained" className={classes.button}>
+            <Button variant="contained" className={classes.button}
+              onClick={this.props.onCancelOperation()}
+            >
               Cancle
             </Button>
             <Button
               variant="contained"
               color="primary"
               className={classes.button}
+              disabled={this.props.ENABLE_CREATE_CUSTOMER}
               onClick={this.props.onCreateCustomer(
                 {
                   FIRST_NAME: this.props.FIRST_NAME,
@@ -199,12 +205,14 @@ const mapStateToProps = createStructuredSelector({
   TRADING_NUM: tradingAccntNumSelector(),
   ADDRESS: addressSelector(),
   ZONE_ID: zoneIdSelector(),
+  ENABLE_CREATE_CUSTOMER: enableCreateCustomer(),
 });
 
 const mapDispatchToProps = dispatch => {
   return{
     onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value})),
-    onCreateCustomer: (data) => (e) => dispatch(addCustomer(data))
+    onCreateCustomer: (data) => (e) => dispatch(addCustomer(data)),
+    onCancelOperation: () => (e) => dispatch(changeComponentView(CHANGE_COMPONENT_LIST)),
   }
 };
 

@@ -14,10 +14,21 @@ import Paper from '@material-ui/core/Paper';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
 //import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 
-import { getCustomerList } from './actions';
+import {
+  getCustomerList,
+  changeComponentView,
+} from './actions';
+
+import {
+  CHANGE_COMPONENT_ADD
+} from './constants';
+
+
 
 const styles = theme => ({
   paper:{
@@ -25,7 +36,13 @@ const styles = theme => ({
     maxHeight: 670,
     overflow: 'scroll',
     overflowX: 'hidden',
-  }
+    position: 'relative',
+  },
+  fab: {
+    position: 'absolute',
+    top: theme.spacing.unit * 0,
+    right: theme.spacing.unit * 1,
+  },
 });
 
 class CustomerList extends Component{
@@ -61,6 +78,14 @@ class CustomerList extends Component{
     const {classes}=this.props;
     return (
       <Paper className ={classes.paper}>
+        <div>
+          <Button variant="fab" color="primary" aria-label="Add"
+            className={classes.button, classes.fab}
+            onClick= {this.props.showAddCustomer()}
+          >
+            <AddIcon />
+          </Button>
+        </div>
         <TextField
           label="Search Customer"
           type="text"
@@ -80,7 +105,8 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadCustomer: dispatch(getCustomerList())
+    loadCustomer: dispatch(getCustomerList()),
+    showAddCustomer: () => (e) => dispatch(changeComponentView(CHANGE_COMPONENT_ADD)),
   };
 }
 
