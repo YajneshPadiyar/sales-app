@@ -10,6 +10,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import ApplicationMenu from '../ApplicationMenu';
 import { onMenuChange, onMenuClick } from './actions';
+
+import { APP_HEADER_TITLE_LIST } from './constants';
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -40,7 +43,7 @@ class AppHeader extends React.Component {
     const { classes } = this.props;
     //const { auth, anchorEl } = this.state;
     //const open = Boolean(anchorEl);
-
+    //console.log(this.props);
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -49,12 +52,13 @@ class AppHeader extends React.Component {
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
+              //hidden={!this.props.authStatus}
               onClick={this.props.menuClick}
               >
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Title is too big to be displayed on smalle
+              {APP_HEADER_TITLE_LIST[this.props.pathname]}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -66,10 +70,15 @@ class AppHeader extends React.Component {
 
 AppHeader.propTypes = {
   classes: PropTypes.object.isRequired,
+  pathname: PropTypes.string.isRequired
 };
 
 const mapStatesToProps = state => (
-  {...state.AppHeader}
+  {...state.AppHeader,
+    pathname: state.router.location.pathname,
+    authStatus: false
+  }
+
 );
 const mapDispatchToProps = dispatch => {
   return {

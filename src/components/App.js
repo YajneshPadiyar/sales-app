@@ -6,28 +6,36 @@ import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 
 import Home from './Home';
+import Order from './Order';
 import Login from './Login';
 import Customers from './Customers';
 import Sales from './Sales';
 import Zones from './Zones';
+import Products from './Products';
 
 import { store } from '../store';
 import { push } from 'react-router-redux';
 
 import {
   HOME_PAGE_PATH,
+  ORDER_PAGE_PATH,
   CUSTOMER_PAGE_PATH,
   DEFAULT_PATH,
   SALES_PAGE_PATH,
-  ZONE_PAGE_PATH
+  ZONE_PAGE_PATH,
+  APP_UPDATE_TITLE,
+  PRODUCT_PAGE_PATH
 } from '../constants/actionTypes';
+
+import { APP_TITLE_LIST } from './AppHeader/constants';
 
 const mapStateToProps = state => {
   return {
     appLoaded: state.common.appLoaded=true,
     appName: state.common.appName,
     currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo
+    redirectTo: state.common.redirectTo,
+    appPath: state.router.location.pathname
   }};
 
 const mapDispatchToProps = dispatch => ({
@@ -44,6 +52,12 @@ class App extends React.Component {
       store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }
+    //console.log("Next Props");
+    if(nextProps.appPath){
+      const newTitle = APP_TITLE_LIST[nextProps.appPath];
+      store.dispatch({type:APP_UPDATE_TITLE, newTitle: newTitle});
+      document.title = newTitle;
+    }//*/
   }
 
   componentWillMount() {
@@ -51,7 +65,7 @@ class App extends React.Component {
     if (token) {
       //agent.setToken(token);
     }
-
+    document.title = APP_TITLE_LIST[this.props.appPath];
     //this.props.onLoad(token ? agent.Auth.current() : null, token);
   }
 
@@ -65,9 +79,11 @@ class App extends React.Component {
             <Switch>
             <Route exact path={DEFAULT_PATH} component={Login}/>
             <Route path={HOME_PAGE_PATH} component={Home} />
+            <Route path={ORDER_PAGE_PATH} component={Order} />
             <Route path={CUSTOMER_PAGE_PATH} component={Customers} />
             <Route path={SALES_PAGE_PATH} component={Sales} />
             <Route path={ZONE_PAGE_PATH} component={Zones} />
+            <Route path={PRODUCT_PAGE_PATH} component={Products} />
             </Switch>
         </div>
       );

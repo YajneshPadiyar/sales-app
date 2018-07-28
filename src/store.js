@@ -21,8 +21,8 @@ const getMiddleware = () => {
     return applyMiddleware(myRouterMiddleware, sagaMiddleware);
   } else {
     // Enable additional logging in non-production environments.
-    //return applyMiddleware(myRouterMiddleware, sagaMiddleware, createLogger())
-    return applyMiddleware(myRouterMiddleware, sagaMiddleware)
+    return applyMiddleware(myRouterMiddleware, sagaMiddleware, createLogger())
+    //return applyMiddleware(myRouterMiddleware, sagaMiddleware)
   }
 };
 

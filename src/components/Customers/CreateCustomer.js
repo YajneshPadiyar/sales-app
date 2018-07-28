@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -15,10 +16,25 @@ import {
   CHANGE_LAST_NAME,
   CHANGE_TRADING_NAME,
   CHANGE_ADDRESS,
-  CHANGE_TRADE_ACCNT_NAME
-
+  CHANGE_TRADE_ACCNT_NAME,
+  CHANGE_COMPONENT_LIST,
 } from './constants';
-import {onInputChange} from './actions';
+import {
+  onInputChange,
+  addCustomer,
+  changeComponentView,
+} from './actions';
+
+import {
+  addressSelector,
+  tradingAccntNumSelector,
+  tradingNameSelector,
+  lastNameSelector,
+  middleNameSelector,
+  firstNameSelector,
+  zoneIdSelector,
+  enableCreateCustomer,
+} from './selectors';
 
 const styles = theme => ({
   root: {
@@ -52,6 +68,7 @@ const styles = theme => ({
 
 class CreateCustomer extends Component{
   render(){
+    //console.log(this.props);
     const {classes}=this.props;
     return(
       <Grid
@@ -110,6 +127,7 @@ class CreateCustomer extends Component{
             className={classes.textField}
             type="text"
             onChange={this.props.onChangeEvent(CHANGE_FIRST_NAME)}
+            value={this.props.FIRST_NAME}
             xs={8}
           />
           <TextField
@@ -136,6 +154,7 @@ class CreateCustomer extends Component{
             <TextField
               id="Address"
               label="Address"
+              className={classes.textField}
               type="text"
               onChange={this.props.onChangeEvent(CHANGE_ADDRESS)}
             />
@@ -144,10 +163,29 @@ class CreateCustomer extends Component{
             item
             className={classes.gridItem}
           >
-            <Button variant="contained"     className={classes.button}>
+            <Button variant="contained" className={classes.button}
+              onClick={this.props.onCancelOperation()}
+            >
               Cancle
             </Button>
-            <Button variant="contained" color="primary"   className={classes.button}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              disabled={this.props.ENABLE_CREATE_CUSTOMER}
+              onClick={this.props.onCreateCustomer(
+                {
+                  FIRST_NAME: this.props.FIRST_NAME,
+                  LAST_NAME: this.props.LAST_NAME,
+                  MIDDLE_NAME: this.props.MIDDLE_NAME,
+                  TRADING_NAME: this.props.TRADING_NAME,
+                  TRADING_NUM: this.props.TRADING_NUM,
+                  ADDRESS: this.props.ADDRESS,
+                  CREATED: new Date(),
+                  LINE_ID: this.props.ZONE_ID
+                }
+              )}
+            >
               Create Customer
             </Button>
           </Grid>
@@ -159,11 +197,22 @@ class CreateCustomer extends Component{
 }
 
 
-const mapStateToProps = state => ({...state.Customers});
+const mapStateToProps = createStructuredSelector({
+  FIRST_NAME: firstNameSelector(),
+  MIDDLE_NAME: middleNameSelector(),
+  LAST_NAME: lastNameSelector(),
+  TRADING_NAME: tradingNameSelector(),
+  TRADING_NUM: tradingAccntNumSelector(),
+  ADDRESS: addressSelector(),
+  ZONE_ID: zoneIdSelector(),
+  ENABLE_CREATE_CUSTOMER: enableCreateCustomer(),
+});
 
 const mapDispatchToProps = dispatch => {
   return{
-    onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value}))
+    onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value})),
+    onCreateCustomer: (data) => (e) => dispatch(addCustomer(data)),
+    onCancelOperation: () => (e) => dispatch(changeComponentView(CHANGE_COMPONENT_LIST)),
   }
 };
 

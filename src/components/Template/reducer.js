@@ -1,10 +1,15 @@
 
+import {} from './actions';
 
-export default (state, action) => {
+const initialState = {
+
+}
+
+export default (state=initialState, action) => {
   switch (action.type){
-    case :
+    case "A":
     return;
-    default
+    default:
     return state;
   }
 }

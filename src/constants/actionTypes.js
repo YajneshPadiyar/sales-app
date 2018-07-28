@@ -39,10 +39,13 @@ export const PROFILE_FAVORITES_PAGE_LOADED = 'PROFILE_FAVORITES_PAGE_LOADED';
 export const AUTHENTICATE = "AUTHENTICATE";
 export const APPLICATION_LOGIN = "APPLICATION_LOGIN";
 export const APP_GOTO_PAGE = "APP_GOTO_PAGE";
+export const APP_UPDATE_TITLE = "APP_UPDATE_TITLE";
 
 
 export const HOME_PAGE_PATH = "/home";
+export const ORDER_PAGE_PATH = "/order";
 export const CUSTOMER_PAGE_PATH = "/customers";
 export const DEFAULT_PATH = "/";
 export const SALES_PAGE_PATH = "/sales";
 export const ZONE_PAGE_PATH = "/zones";
+export const PRODUCT_PAGE_PATH = "/products";

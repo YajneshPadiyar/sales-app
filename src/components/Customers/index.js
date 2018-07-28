@@ -6,7 +6,14 @@ import Grid from '@material-ui/core/Grid';
 
 import CreateCustomer from './CreateCustomer';
 import CustomerList from './CustomerList';
+import EditCustomer from './EditCustomer';
 //import {onInputChange} from './actions';
+
+import {
+  CHANGE_COMPONENT_ADD,
+  CHANGE_COMPONENT_EDIT,
+} from './constants';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -25,26 +32,36 @@ const styles = theme => ({
 class Customers extends Component {
   render() {
     const { classes } = this.props;
+    //console.log(this.props);
+    this.displayComp = (type) =>{
+      switch(type){
+        case CHANGE_COMPONENT_EDIT:
+        return <EditCustomer/>;
+        case CHANGE_COMPONENT_ADD:
+        return <CreateCustomer/>;
+        default:
+        return <CustomerList/>;
+      }
+    }
     return(
+
       <Grid
         container
         className={classes.root}
-        spacing={24}
         direction="row"
         justify="center"
       >
         <Grid item className={classes.gridItem}>
-          <CustomerList/>
-        </Grid>
-        <Grid item className={classes.gridItem}>
-          <CreateCustomer/>
+          {this.displayComp(this.props.CompState)}
         </Grid>
       </Grid>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  CompState: state.Customers.CompState
+});
 
 const mapDispatchToProps = dispatch => {
   return{
