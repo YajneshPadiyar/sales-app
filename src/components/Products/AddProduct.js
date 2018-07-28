@@ -80,7 +80,7 @@ class AddProduct extends Component {
         container
         justify="center"
         className={classes.root}
-        spacing={24}
+        
       >
         <Paper className={classes.paper}>
         <div>

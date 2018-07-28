@@ -43,6 +43,7 @@
       "!src/**/*.test.{js,jsx}",
       "!src/*/RbGenerated*/*.{js,jsx}",
       "!src/index.js",
+      "!src/components/Template/*",
       "!src/global-styles.js",
       "!src/*/*/Loadable.{js,jsx}"
     ],

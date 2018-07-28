@@ -31,7 +31,7 @@ class Zones extends Component {
         container
         justify="center"
         className={classes.root}
-        spacing={24}
+        
         direction="row"
       >
         <Grid className={classes.gridItem}>

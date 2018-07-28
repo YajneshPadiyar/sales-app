@@ -93,5 +93,5 @@ const mapDispatchToProps = dispatch => {
     loadZone:(data)=> dispatch(getZoneList(data))
   }
 };
-console.log(mapStateToProps);
+//console.log(mapStateToProps);
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ZoneList));

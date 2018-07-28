@@ -1,5 +1,5 @@
 import {  put, call } from 'redux-saga/effects';
-import { updateCustomerList, addedCustomer } from './actions';
+import { updateCustomerList, addedCustomer, updatedCustomer } from './actions';
 import { API_END_POINT, API_POST_OPTIONS } from '../../constants/api_constants';
 import request from '../../utils/request';
 
@@ -18,14 +18,27 @@ function* getListOfCustomers(action) {
 
 function* addCustomer(action) {
   try{
-    console.log(action);
+    //console.log(action);
     const response = yield call(
       request,
       API_END_POINT+action.API_URI,
       {...API_POST_OPTIONS, body: JSON.stringify(action.body)}
     );
-    console.log(response);
+    //console.log(response);
     yield put(addedCustomer(response));
+  }catch(e) {
+    console.log(e);
+  }
+}
+
+function* updateCustomer(action) {
+  try{
+    const response = yield call(
+      request,
+      API_END_POINT+action.API_URI,
+      {...API_POST_OPTIONS, body: JSON.stringify(action.body)}
+    );
+    yield put(updatedCustomer(response));
   }catch(e) {
     console.log(e);
   }
@@ -33,5 +46,6 @@ function* addCustomer(action) {
 
 export {
   getListOfCustomers,
-  addCustomer
+  addCustomer,
+  updateCustomer
 };

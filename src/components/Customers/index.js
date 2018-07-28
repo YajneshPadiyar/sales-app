@@ -6,11 +6,12 @@ import Grid from '@material-ui/core/Grid';
 
 import CreateCustomer from './CreateCustomer';
 import CustomerList from './CustomerList';
+import EditCustomer from './EditCustomer';
 //import {onInputChange} from './actions';
 
 import {
   CHANGE_COMPONENT_ADD,
-  CHANGE_COMPONENT_LIST,
+  CHANGE_COMPONENT_EDIT,
 } from './constants';
 
 const styles = theme => ({
@@ -31,16 +32,22 @@ const styles = theme => ({
 class Customers extends Component {
   render() {
     const { classes } = this.props;
-
+    //console.log(this.props);
     this.displayComp = (type) =>{
-      return (type==CHANGE_COMPONENT_ADD?<CreateCustomer/>:<CustomerList/>)
+      switch(type){
+        case CHANGE_COMPONENT_EDIT:
+        return <EditCustomer/>;
+        case CHANGE_COMPONENT_ADD:
+        return <CreateCustomer/>;
+        default:
+        return <CustomerList/>;
+      }
     }
     return(
 
       <Grid
         container
         className={classes.root}
-        spacing={24}
         direction="row"
         justify="center"
       >

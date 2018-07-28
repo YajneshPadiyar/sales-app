@@ -56,7 +56,7 @@ class ZoneList extends Component {
           </ListItemAvatar>
           <ListItemText
             primary={item.ZONE_NAME}
-            secondary={item.ZONE_ADDR}
+            secondary={item.ZONE_ADDR+", "+ item.REF_ID}
           />
         </ListItem>
       )

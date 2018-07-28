@@ -9,6 +9,9 @@ import {
   ADD_CUSTOMER_COMPLETE,
   CHANGE_COMPONENT_LIST,
   CHANGE_COMPONENT_ADD,
+  CHANGE_COMPONENT_EDIT,
+  CHANGE_LIST_PAGE,
+  EDIT_CUSTOMER,
 } from '../constants';
 
 
@@ -20,6 +23,8 @@ const initialState ={
     TradingName: "",
     TradeAccntNum: "",
     Address: "",
+    CurrentPage: 1,
+    CurrentPageSize: 8,
   CustomerList: [],
 };
 
@@ -28,6 +33,8 @@ import {
   updateCustomerList,
   addedCustomer,
   changeComponentView,
+  updateCustomer,
+  editCustomer,
 } from '../actions';
 
 import reducer from '../reducer';
@@ -47,6 +54,7 @@ describe('Customer Reducer', () => {
     { CaseName: 'TradingName', testValue: 'testValue', type: CHANGE_TRADING_NAME,},
     { CaseName: 'TradeAccntNum', testValue: 'testValue', type: CHANGE_TRADE_ACCNT_NAME,},
     { CaseName: 'Address', testValue: 'testValue', type: CHANGE_ADDRESS,},
+    { CaseName: 'CurrentPage', testValue: 'testValue', type: CHANGE_LIST_PAGE,},
   ];
 
   for (let testCase in testCases){
@@ -88,6 +96,33 @@ describe('Customer Reducer', () => {
   it('CHANGE_COMPONENT_ADD', () => {
     expectedResult = {...state , CompState: CHANGE_COMPONENT_ADD};
     expect(reducer(state, changeComponentView(CHANGE_COMPONENT_ADD)))
+    .toEqual(expectedResult);
+  });
+
+  it('EDIT_CUSTOMER', () => {
+
+    const request = {
+      FIRST_NAME: "A",
+      MIDDLE_NAME: "B",
+      LAST_NAME: "C",
+      TRADING_NUM: "1",
+      TRADING_NAME: "D",
+      ADDRESS: "E",
+      ZONE_ID: "123",
+      REF_ID: "1234",
+    };
+
+    expectedResult = {...state,
+      FirstName: request.FIRST_NAME,
+      MiddleName: request.MIDDLE_NAME,
+      LastName: request.LAST_NAME,
+      TradingName: request.TRADING_NAME,
+      TradeAccntNum: request.TRADING_NUM,
+      Address: request.ADDRESS,
+      REF_ID: request.REF_ID,
+      ZONE_ID: request.ZONE_ID,
+      CompState: CHANGE_COMPONENT_EDIT};
+    expect(reducer(state, editCustomer(request)))
     .toEqual(expectedResult);
   });
 
