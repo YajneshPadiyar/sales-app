@@ -16,9 +16,10 @@ export const GET_CUSTOMER_LIST = "GET_CUSTOMER_LIST";
 export const ADD_CUSTOMER_COMPLETE = "ADD_CUSTOMER_COMPLETE";
 export const ADD_CUSTOMER = "ADD_CUSTOMER";
 export const UPDATE_CUSTOMER = "UPDATE_CUSTOMER";
-
+export const DELETE_CUSTOMER = "DELETE_CUSTOMER";
 
 //api URI
 export const GET_CUSTOMER_URI = "/getCustomers";
 export const ADD_CUSTOMER_URI = "/addCustomer";
 export const UPDATE_CUSTOMER_URI = "/updateCustomer";
+export const DELETE_CUSTOMER_URI = "/deleteCustomer";

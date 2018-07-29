@@ -13,7 +13,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import { getZoneList } from '../Zones/actions';
-import { setZoneId, updateZoneList } from './actions';
+import { setZoneId, updateZoneList, filterZone } from './actions';
 
 import { ZONE_TYPE } from '../Zones/constants';
 
@@ -41,11 +41,14 @@ class ZoneList extends Component {
   componentWillMount(){
     this.props.setDefaultZone(this.props.DefaultZone);
     this.props.loadZone({ZONE_TYPE: ZONE_TYPE});
-    this.props.updateZoneList(this.props.ZoneList);
   }
   render() {
     const {classes}=this.props;
-    const ZoneListAPI = this.props.ZONE_LIST;
+    //console.log(this.props.S_ZONE_LIST);
+    if(this.props.S_ZONE_LIST.length == 0 ){
+      this.props.updateZoneList(this.props.ZoneList);
+    }
+    const ZoneListAPI = this.props.S_ZONE_LIST;
     const ZoneList = ZoneListAPI.map(item=>{
       return (
         <ListItem key={item.REF_ID} divider className={item.REF_ID===this.props.HomeZoneId?classes.activeListItem:""}>
@@ -67,6 +70,7 @@ class ZoneList extends Component {
         <TextField
           lable="Search Zone"
           type="text"
+          onChange={this.props.onFilterZone(this.props.S_ZONE_LIST)}
         />
         <List>
           {ZoneList}
@@ -83,6 +87,7 @@ ZoneList.propTypes = {
 const mapStateToProps = state => ({
   ZoneList: state.Zones.ZONE_LIST,
   ZONE_LIST: state.Home.ZONE_LIST,
+  S_ZONE_LIST: state.Home.S_ZONE_LIST,
   DefaultZone: state.Login.DEFAULT_ZONE_ID,
   HomeZoneId: state.Home.ZONE_ID
 });
@@ -93,6 +98,7 @@ const mapDispatchToProps = dispatch => {
     setDefaultZone: (Ref_Id) => dispatch(setZoneId(Ref_Id)),
     selectZone:(Ref_Id) => (e) => dispatch(setZoneId(Ref_Id)),
     updateZoneList: (ZoneList) => dispatch(updateZoneList(ZoneList)),
+    onFilterZone: (ZoneList) => (e) => dispatch(filterZone(ZoneList, e.target.value)),
   }
 };
 

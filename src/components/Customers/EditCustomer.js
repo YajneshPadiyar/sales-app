@@ -23,6 +23,7 @@ import {
   onInputChange,
   changeComponentView,
   updateCustomer,
+  deleteCustomer,
 } from './actions';
 
 import {
@@ -200,6 +201,7 @@ class EditCustomer extends Component{
               variant="contained"
               color="secondary"
               className={classes.button}
+              onClick={this.props.onDelete(this.props.REF_ID)}
             >
               Delete Customer
             </Button>
@@ -230,6 +232,7 @@ const mapDispatchToProps = dispatch => {
     onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value})),
     onUpdateCustomer: (ref_id, data) => (e) => dispatch(updateCustomer(ref_id, data)),
     onCancelOperation: () => (e) => dispatch(changeComponentView(CHANGE_COMPONENT_LIST)),
+    onDelete: (REF_ID) => (e) => dispatch(deleteCustomer(REF_ID)),
   }
 };
 

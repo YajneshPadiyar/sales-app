@@ -9,6 +9,8 @@ import {
   CHANGE_LIST_PAGE,
   EDIT_CUSTOMER,
   UPDATE_CUSTOMER,
+  DELETE_CUSTOMER,
+  DELETE_CUSTOMER_URI,
 } from './constants';
 
 import cleanNullAttributes from '../../utils/customFunction/cleanNullAttributes';
@@ -120,6 +122,28 @@ export const updateCustomer = (REF_ID, request) => {
 }
 
 export const updatedCustomer = (response) => {
+  if(response.status){
+    return {
+      type: ADD_CUSTOMER_COMPLETE
+    };
+  }else{
+    return {
+      type: ADD_CUSTOMER_COMPLETE
+    };
+  }
+}
+
+export const deleteCustomer = (REF_ID) => {
+  return {
+    type: DELETE_CUSTOMER,
+    API_URI : DELETE_CUSTOMER_URI,
+    body: {
+      REF_ID: REF_ID,
+    }
+  }
+}
+
+export const deletedCustomer = (response) =>{
   if(response.status){
     return {
       type: ADD_CUSTOMER_COMPLETE

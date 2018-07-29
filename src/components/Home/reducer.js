@@ -5,7 +5,8 @@ import {
 
 const initialState = {
   ZONE_ID: "",
-  ZONE_LIST: []
+  ZONE_LIST: [],
+  S_ZONE_LIST: [],
 };
 
 export default (state=initialState, action) => {
@@ -16,7 +17,10 @@ export default (state=initialState, action) => {
       ZONE_LIST: [...state.ZONE_LIST]
       };
     case UPDATE_ZONE_LIST:
-    return {...state, ZONE_LIST: action.ZONE_LIST};
+    return {...state,
+      ZONE_LIST: action.ZONE_LIST,
+      S_ZONE_LIST: action.S_ZONE_LIST,
+    };
     default:
     return state;
   }
