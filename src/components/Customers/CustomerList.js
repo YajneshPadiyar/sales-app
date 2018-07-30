@@ -68,7 +68,7 @@ class CustomerList extends Component{
     const CurrentPageSize = this.props.CurrentPageSize;
     const CurrentPageData = getCurrentPageData(CustListAPI, CurrentPage, CurrentPageSize);
     const getCustomerName = (FN, MN, LN) =>{
-      if(MN == undefined){
+      if(MN === undefined){
         return FN+" "+LN;
       }else{
         return FN+" "+MN+" "+LN;

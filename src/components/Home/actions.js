@@ -1,5 +1,10 @@
 
-import { SET_ZONE_ID, UPDATE_ZONE_LIST } from './constants';
+import {
+  SET_ZONE_ID,
+  UPDATE_ZONE_LIST,
+  CHANGE_LIST_PAGE,
+  UPDATE_AFTER_SEARCH,
+  } from './constants';
 
 export const setZoneId = (Ref_Id) => {
   return {
@@ -20,9 +25,10 @@ export const updateZoneList = (ZONE_LIST) => {
 export const filterZone =(ZoneList, searchString) => {
   if(searchString == ""){
     return {
-      type: UPDATE_ZONE_LIST,
+      type: UPDATE_AFTER_SEARCH,
       ZONE_LIST: ZoneList,
       S_ZONE_LIST: [],
+      SEARCH_STRING: "",
     }
   }else{
     let s_Zone_List = [];
@@ -45,9 +51,39 @@ export const filterZone =(ZoneList, searchString) => {
       //console.log(currentZone);
     }
     return {
-      type: UPDATE_ZONE_LIST,
+      type: UPDATE_AFTER_SEARCH,
       ZONE_LIST: ZoneList,
       S_ZONE_LIST: s_Zone_List,
+      SEARCH_STRING: searchString,
     }
+  }
+}
+
+
+export const incrementPage = (currentPage) => {
+  return {
+    type: CHANGE_LIST_PAGE,
+    VALUE: currentPage+1,
+  }
+}
+
+export const decrementPage = (currentPage) => {
+  return {
+    type: CHANGE_LIST_PAGE,
+    VALUE: currentPage-1,
+  }
+}
+
+export const getCurrentPageData = (data, currentPage, CurrentPageSize) => {
+  //console.log(data);
+  //console.log(currentPage);
+  //console.log(CurrentPageSize);
+  return data.slice(currentPage*CurrentPageSize-CurrentPageSize,currentPage*CurrentPageSize);
+}
+
+export const chnageField = (type, value) => {
+  return {
+    type: type,
+    VALUE: value,
   }
 }
