@@ -37,7 +37,7 @@ describe('customer selectors', () =>{
     });
   }
 
-  it('should enable crerate customer', () => {
+  it('should enable create customer', () => {
     const Tselector = enableCreateCustomer();
     const mockedState = {
       Customers: {
@@ -46,12 +46,15 @@ describe('customer selectors', () =>{
         Address: "EF",
         TradingName: "GH",
         TradeAccntNum: "wewr"
+      },
+      Home: {
+        "ZONE_ID": 1234
       }
-    }
+    };
     expect(Tselector(mockedState)).toBeFalsy();
   });
 
-  it('should disable crerate customer', () => {
+  it('should disable create customer', () => {
     const Tselector = enableCreateCustomer();
     const mockedState = {
       Customers: {
@@ -60,8 +63,12 @@ describe('customer selectors', () =>{
         Address: "",
         TradingName: "",
         TradeAccntNum: ""
+      },
+      Home: {
+        "ZONE_ID": 1234
       }
-    }
+    };
+    
     expect(Tselector(mockedState)).toBeTruthy();
   });
 

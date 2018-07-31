@@ -80,10 +80,3 @@ export const getCurrentPageData = (data, currentPage, CurrentPageSize) => {
   //console.log(CurrentPageSize);
   return data.slice(currentPage*CurrentPageSize-CurrentPageSize,currentPage*CurrentPageSize);
 }
-
-export const chnageField = (type, value) => {
-  return {
-    type: type,
-    VALUE: value,
-  }
-}

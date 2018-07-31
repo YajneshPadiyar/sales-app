@@ -8,6 +8,8 @@ import {
   CHANGE_LIST_PAGE,
   UPDATE_CUSTOMER_URI,
   UPDATE_CUSTOMER,
+  DELETE_CUSTOMER,
+  DELETE_CUSTOMER_URI,
 } from '../constants';
 
 import {
@@ -22,6 +24,8 @@ import {
   getCurrentPageData,
   updateCustomer,
   updatedCustomer,
+  deleteCustomer,
+  deletedCustomer,
 } from '../actions';
 
 describe('Customer Actions', () => {
@@ -153,6 +157,30 @@ describe('Customer Actions', () => {
     expect(updatedCustomer(response)).toEqual(expectedResult);
     response.status = false;
     expect(updatedCustomer(response)).toEqual(expectedResult);
+  });
+
+  it('deleteCustomer', () => {
+    const refId= 123;
+    const expectedResult = {
+      type: DELETE_CUSTOMER,
+      API_URI: DELETE_CUSTOMER_URI,
+      body:{
+        REF_ID: 123
+      }
+    };
+    expect(deleteCustomer(refId)).toEqual(expectedResult);
+  });
+
+  it('deletedCustomer', () => {
+    let response = {
+      status: false
+    };
+    const expectedResult = {
+      type: ADD_CUSTOMER_COMPLETE,
+    };
+    expect(deletedCustomer(response)).toEqual(expectedResult);
+    response.status = true;
+    expect(deletedCustomer(response)).toEqual(expectedResult);
   });
 
 });

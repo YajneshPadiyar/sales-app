@@ -51,14 +51,14 @@ const getREF_IDSelector = () => createSelector(
 
 const enableCreateCustomer = () => createSelector(
   customerState, homeState,
-  (customer,  home) => {
+  (customer, home) => {
+    //console.log(home);
     const a = customer.FirstName.length>0;
     const b = customer.LastName.length>0;
     const c = customer.Address.length>0;
     const d = customer.TradingName.length>0;
     const e = customer.TradeAccntNum.length>0;
     const f = home.ZONE_ID.toString().length>0;
-    console.log(f);
     return !(a && b && c && d && e && f);
   }
 )
