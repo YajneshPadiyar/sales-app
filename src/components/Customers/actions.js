@@ -11,6 +11,7 @@ import {
   UPDATE_CUSTOMER,
   DELETE_CUSTOMER,
   DELETE_CUSTOMER_URI,
+  UPDATE_AFTER_SEARCH,
 } from './constants';
 
 import cleanNullAttributes from '../../utils/customFunction/cleanNullAttributes';
@@ -151,6 +152,46 @@ export const deletedCustomer = (response) =>{
   }else{
     return {
       type: ADD_CUSTOMER_COMPLETE
+    };
+  }
+}
+
+export const filterSearch = (CustomerList, SearchString) => {
+  if(SearchString == ""){
+    return {
+      type: UPDATE_AFTER_SEARCH,
+      S_CustomerList: CustomerList,
+      SEARCH_STRING: ""
+    };
+  }else{
+    let S_CustomerList =[];
+    const CSearchString = SearchString.toLowerCase();
+
+    for(let cust in CustomerList){
+      const currentCust = CustomerList[cust];
+      //console.log(currentCust);
+      //console.log(currentCust.MIDDLE_NAME!== undefined);
+
+      if(
+        currentCust.FIRST_NAME.toLowerCase().indexOf(CSearchString)>-1
+        ||
+        (currentCust["MIDDLE_NAME"] !== undefined?currentCust["MIDDLE_NAME"].toLowerCase().indexOf(CSearchString)>-1:false)
+        ||
+        currentCust.LAST_NAME.toLowerCase().indexOf(CSearchString)>-1
+        ||
+        currentCust.TRADING_NUM.toLowerCase().indexOf(CSearchString)>-1
+        ||
+        currentCust.TRADING_NAME.toLowerCase().indexOf(CSearchString)>-1
+        ||
+        currentCust.LINE_ID.toLowerCase().indexOf(CSearchString)>-1
+      ){
+        S_CustomerList.push(currentCust);
+      }
+    }
+    return {
+      type: UPDATE_AFTER_SEARCH,
+      S_CustomerList: S_CustomerList,
+      SEARCH_STRING: SearchString,
     };
   }
 }

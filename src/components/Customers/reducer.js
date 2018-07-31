@@ -12,6 +12,7 @@ import {
   CHANGE_COMPONENT_EDIT,
   CHANGE_LIST_PAGE,
   EDIT_CUSTOMER,
+  UPDATE_AFTER_SEARCH,
 } from './constants';
 
 
@@ -26,6 +27,7 @@ const initialState ={
     CurrentPage: 1,
     CurrentPageSize: 8,
     CustomerList: [],
+    S_CustomerList: [],
 }
 
 
@@ -45,7 +47,11 @@ export default (state=initialState, action) => {
     case CHANGE_ADDRESS:
       return {...state, Address: action.VALUE};
     case UPDATE_CUSTOMER_LIST:
-      return {...state, CustomerList: [...action.VALUE]};
+      return {
+        ...state,
+        CustomerList: [...action.VALUE],
+        S_CustomerList: [...action.VALUE],
+      };
     case ADD_CUSTOMER_COMPLETE:
       return {...state,
         CompState: CHANGE_COMPONENT_LIST};
@@ -57,7 +63,8 @@ export default (state=initialState, action) => {
         TradingName: "",
         TradeAccntNum: "",
         Address: "",
-        CompState: CHANGE_COMPONENT_ADD};
+        CompState: CHANGE_COMPONENT_ADD
+      };
     case CHANGE_COMPONENT_LIST:
       return {...state, CompState: CHANGE_COMPONENT_LIST};
     case CHANGE_LIST_PAGE:
@@ -75,6 +82,12 @@ export default (state=initialState, action) => {
         ZONE_ID: action.VALUE.LINE_ID,
         CompState: CHANGE_COMPONENT_EDIT,
         };
+    case UPDATE_AFTER_SEARCH:
+      return{
+        ...state,
+        S_CustomerList: action.S_CustomerList,
+        SearchString: action.SEARCH_STRING,
+      };
     default:
     return state;
   }

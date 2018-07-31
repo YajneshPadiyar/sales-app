@@ -26,6 +26,7 @@ import {
   decrementPage,
   incrementPage,
   editCustomer,
+  filterSearch,
 } from './actions';
 
 import {
@@ -57,16 +58,17 @@ const styles = theme => ({
 class CustomerList extends Component{
 
   componentWillMount(){
-    console.log(this.props.ZoneID);
+    //console.log(this.props.ZoneID);
     this.props.loadCustomer(this.props.ZoneID);
   }
 
   render(){
 
     const CustListAPI = this.props.CustomerList;
+    const S_CustomerList = this.props.S_CustomerList;
     const CurrentPage = this.props.CurrentPage;
     const CurrentPageSize = this.props.CurrentPageSize;
-    const CurrentPageData = getCurrentPageData(CustListAPI, CurrentPage, CurrentPageSize);
+    const CurrentPageData = getCurrentPageData(S_CustomerList, CurrentPage, CurrentPageSize);
     const getCustomerName = (FN, MN, LN) =>{
       if(MN === undefined){
         return FN+" "+LN;
@@ -112,6 +114,7 @@ class CustomerList extends Component{
         <TextField
           label="Search Customer"
           type="text"
+          onChange = {this.props.onFilterSearch(CustListAPI)}
         />
         <List>
           {CustList}
@@ -149,6 +152,8 @@ const mapStateToProps = state => (
     CurrentPage: state.Customers.CurrentPage,
     CurrentPageSize: state.Customers.CurrentPageSize,
     ZoneID: state.Home.ZONE_ID,
+    S_CustomerList: state.Customers.S_CustomerList,
+    SearchString: state.Customers.SearchString,
   }
 );
 
@@ -160,6 +165,7 @@ const mapDispatchToProps = dispatch => {
     onDecrement: (currentPage) => (e) => dispatch(decrementPage(currentPage)),
     onIncrement: (currentPage) => (e) => dispatch(incrementPage(currentPage)),
     EditCustomer: (currCustomer) => (e) => dispatch(editCustomer(currCustomer)),
+    onFilterSearch : (CustList) => (e) => dispatch(filterSearch(CustList, e.target.value)),
   };
 }
 

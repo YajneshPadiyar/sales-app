@@ -32,6 +32,7 @@ export const filterZone =(ZoneList, searchString) => {
     }
   }else{
     let s_Zone_List = [];
+    const CSearchString = searchString.toLowerCase();
     for(let zone in ZoneList){
       const currentZone = ZoneList[zone];
       //console.log(currentZone.ZONE_NAME.toLowerCase());
@@ -39,11 +40,11 @@ export const filterZone =(ZoneList, searchString) => {
       //console.log(currentZone.ZONE_NAME.toLowerCase().indexOf(searchString.toLowerCase()));
 
       if(
-        currentZone.ZONE_NAME.toLowerCase().indexOf(searchString.toLowerCase())>-1
+        currentZone.ZONE_NAME.toLowerCase().indexOf(CSearchString)>-1
         ||
-        currentZone.REF_ID.toString().toLowerCase().indexOf(searchString.toLowerCase())>-1
+        currentZone.REF_ID.toString().toLowerCase().indexOf(CSearchString)>-1
         ||
-        currentZone.ZONE_ADDR.toLowerCase().indexOf(searchString.toLowerCase())>-1
+        currentZone.ZONE_ADDR.toLowerCase().indexOf(CSearchString)>-1
       ){
           s_Zone_List.push(currentZone);
           //console.log(currentZone);
