@@ -20,12 +20,14 @@ import {
   CHANGE_ZONE_ADDR,
   CHANGE_ZONE_NAME,
   ZONE_TYPE,
-  STATUS_ACTIVE
+  STATUS_ACTIVE,
+  COMP_ZONE_LIST,
 } from './constants';
 
 import {
   onInputChange,
-  onCreateZone
+  onCreateZone,
+  changeComponent,
 } from './actions';
 
 const styles = theme => ({
@@ -117,6 +119,7 @@ class CreateZone extends Component {
               <Button
                 variant="contained"
                 className={classes.button}
+                onClick={this.props.onCancel}
               >Cancel</Button>
               <Button
                 variant="contained"
@@ -152,6 +155,7 @@ const mapDispatchToProps = dispatch => {
   return{
     onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value})),
     onCreateZone: (data) => (e) => dispatch(onCreateZone(data)),
+    onCancel: (e) => dispatch(changeComponent(COMP_ZONE_LIST)),
   }
 };
 

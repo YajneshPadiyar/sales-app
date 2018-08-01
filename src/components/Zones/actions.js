@@ -4,7 +4,10 @@ import {
   CREATE_ZONE,
   RESET_ZONE_FORM,
   UPDATE_ZONE_LIST,
-  GET_ZONE_URI
+  GET_ZONE_URI,
+  UPDATE_AFTER_SEARCH,
+  CHANGE_LIST_PAGE,
+  CHANGE_COMPONENT,
 } from './constants';
 
 
@@ -55,4 +58,46 @@ export const updateZoneList = (response) => {
       ZONE_LIST: []
     }
   }
+}
+export const incrementPage = (currentPage) => {
+  return {
+    type: CHANGE_LIST_PAGE,
+    CurrentPage: currentPage+1
+  }
+}
+
+export const decrementPage = (currentPage) => {
+  return {
+    type: CHANGE_LIST_PAGE,
+    CurrentPage: currentPage-1
+  }
+}
+
+export const filterZone = (ZoneList, SearchString) => {
+  if(SearchString = ""){
+    return {
+      type: UPDATE_AFTER_SEARCH,
+      SearchString: SearchString,
+      S_ZONE_LIST: ZoneList,
+    };
+  }else{
+    const CSearchString = SearchString.toLowerCase();
+
+    return {
+      type: UPDATE_AFTER_SEARCH,
+      SearchString: SearchString,
+      S_ZONE_LIST: ZoneList,
+    };
+  }
+}
+
+export const getCurrentPageData = (data, currentPage, CurrentPageSize) => {
+  return data.slice(currentPage*CurrentPageSize-CurrentPageSize,currentPage*CurrentPageSize);
+}
+
+export const changeComponent = (comp) =>{
+  return {
+    type: CHANGE_COMPONENT,
+    COMP: comp,
+  };
 }

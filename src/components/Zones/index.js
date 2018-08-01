@@ -8,6 +8,11 @@ import Grid from '@material-ui/core/Grid';
 import CreateZones from './CreateZones';
 import ZoneList from './ZoneList';
 
+import {
+  COMP_ZONE_ADD,
+  COMP_ZONE_EDIT,
+} from './constants';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -25,20 +30,28 @@ const styles = theme => ({
 
 class Zones extends Component {
   render() {
-    const {classes}=this.props;
+    const {classes,currentComp}=this.props;
+
+    this.displayComp = (type) =>{
+      switch(type){
+        case COMP_ZONE_EDIT:
+        return ;
+        case COMP_ZONE_ADD:
+        return <CreateZones/>;
+        default:
+        return <ZoneList/>;
+      }
+    }
+
     return(
       <Grid
         container
         justify="center"
         className={classes.root}
-        
         direction="row"
       >
         <Grid className={classes.gridItem}>
-          <CreateZones/>
-        </Grid>
-        <Grid className={classes.gridItem}>
-          <ZoneList/>
+          {this.displayComp(this.props.currentComp)}
         </Grid>
       </Grid>
     );
@@ -48,7 +61,9 @@ class Zones extends Component {
 Zones.propTypes = {
   classes: PropTypes.object
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  currentComp: state.Zones.COMP_STATE,
+});
 
 const mapDispatchToProps = dispatch => {};
 

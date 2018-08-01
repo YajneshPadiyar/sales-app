@@ -16,3 +16,18 @@ export const zoneListSelector = () => createSelector(
   zoneState,
   (zone) => zone.ZONE_LIST
 );
+
+export const currentPageSelector = () => createSelector(
+  zoneState,
+  (zone) => zone.CURRENT_PAGE
+);
+
+export const currentPageSizeSelector = () => createSelector(
+  zoneState,
+  (zone) => zone.CURRENT_PAGE_SIZE
+);
+
+export const currentCompSelector = () => createSelector(
+  zoneState,
+  (zone) => zone.COMP_STATE
+);

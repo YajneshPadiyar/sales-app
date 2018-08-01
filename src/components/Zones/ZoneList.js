@@ -13,26 +13,51 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
-import { getZoneList } from './actions';
+import {
+  getZoneList,
+  filterZone,
+  incrementPage,
+  decrementPage,
+  getCurrentPageData,
+  changeComponent,
+} from './actions';
 
-import { ZONE_TYPE } from './constants';
+import {
+  ZONE_TYPE,
+  COMP_ZONE_ADD,
+} from './constants';
 
-import { zoneListSelector } from './selectors';
+import {
+  zoneListSelector,
+  currentPageSelector,
+  currentPageSizeSelector,
+  currentCompSelector,
+} from './selectors';
 
 const styles = theme => ({
   paper:{
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     position: 'relative',
-    overflow: 'auto',
     minWidth: 400,
-    maxHeight: 300,
-    maxWidth: 360,
-    overflow: 'scroll',
+    maxHeight: 670,
+    overflow: 'hidden',
     overflowX: 'hidden',
+    padding: theme.spacing.unit * 1,
+  },
+  fab: {
+    position: 'absolute',
+    top: theme.spacing.unit * 1,
+    right: theme.spacing.unit * 1,
+  },
+  button: {
+    width: "45%",
+    margin: theme.spacing.unit * 1,
   }
 });
 
@@ -43,7 +68,11 @@ class ZoneList extends Component {
   render() {
     //console.log(this.props);
     const ZoneListAPI = this.props.ZoneList;
-    const ZoneList = ZoneListAPI.map(item=>{
+    const CurrentPage = this.props.CurrentPage;
+    const CurrentPageSize = this.props.CurrentPageSize;
+
+    const currentZoneList = getCurrentPageData(ZoneListAPI, CurrentPage, CurrentPageSize);
+    const ZoneList = currentZoneList.map(item=>{
       return (
         <ListItem key={item.REF_ID} divider>
           <ListItemAvatar>
@@ -57,7 +86,7 @@ class ZoneList extends Component {
           />
           <ListItemSecondaryAction>
             <IconButton aria-label="Delete">
-              <DeleteIcon />
+              <EditIcon />
             </IconButton>
           </ListItemSecondaryAction>
         </ListItem>
@@ -67,13 +96,44 @@ class ZoneList extends Component {
     const {classes}=this.props;
     return(
       <Paper className={classes.paper}>
+        <div>
+          <Button variant="fab" color="primary" aria-label="Add"
+            className={classes.button, classes.fab}
+            onClick= {this.props.onChangeComp(COMP_ZONE_ADD)}
+          >
+            <AddIcon />
+          </Button>
+        </div>
         <TextField
           lable="Search Zone"
           type="text"
+          onChange={this.props.onFilterSearch}
         />
         <List>
           {ZoneList}
         </List>
+        <div>
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={this.props.onDecrement(CurrentPage)}
+            color="primary"
+            disabled={CurrentPage===1}
+            size='small'
+          >
+            Previous
+          </Button>
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={this.props.onIncrement(CurrentPage)}
+            color="primary"
+            disabled={CurrentPage*CurrentPageSize>=ZoneListAPI.length}
+            size='small'
+          >
+            Next
+          </Button>
+        </div>
       </Paper>
     );
   }
@@ -84,13 +144,20 @@ ZoneList.propTypes = {
 }
 
 const mapStateToProps  = createStructuredSelector({
-  ZoneList: zoneListSelector()
+  ZoneList: zoneListSelector(),
+  CurrentPage: currentPageSelector(),
+  CurrentPageSize: currentPageSizeSelector(),
 });
 
 //console.log(mapStateToProps());
 const mapDispatchToProps = dispatch => {
   return {
-    loadZone:(data)=> dispatch(getZoneList(data))
+    loadZone:(data)=> dispatch(getZoneList(data)),
+    onFilterZone: (ZoneList) => dispatch(filterZone(ZoneList)),
+    onIncrement: (CurrentPage) => (e) => dispatch(incrementPage(CurrentPage)),
+    onDecrement: (CurrentPage) => (e) => dispatch(decrementPage(CurrentPage)),
+    onChangeComp: (comp) => (e) => dispatch(changeComponent(comp)),
+    onFilterSearch: (ZoneList) => (e) => dispatch(filterZone(ZoneList, e.target.value)),
   }
 };
 //console.log(mapStateToProps);
