@@ -7,14 +7,15 @@ import {
   UPDATE_AFTER_SEARCH,
   CHANGE_LIST_PAGE,
   CHANGE_COMPONENT,
-  COMP_ZONE_ADD,
-  COMP_ZONE_EDIT,
   COMP_ZONE_LIST,
+  COMP_ZONE_EDIT,
+  COMP_ZONE_ADD,
 } from './constants';
 
 const initialState = {
   ZONE_NAME: "",
   ZONE_ADDR: "",
+  REF_ID: "",
   ZONE_LIST: [],
   S_ZONE_LIST: [],
   CURRENT_PAGE: 1,
@@ -35,6 +36,7 @@ export default (state=initialState, action) => {
       ...state,
       ZONE_NAME: "",
       ZONE_ADDR: "",
+      REF_ID: "",
       COMP_STATE: COMP_ZONE_LIST,
     };
     case UPDATE_ZONE_LIST:
@@ -55,10 +57,30 @@ export default (state=initialState, action) => {
       CURRENT_PAGE: action.CurrentPage,
     }
     case CHANGE_COMPONENT:
-    return {
-      ...state,
-      COMP_STATE: action.COMP,
-    }
+      switch(action.COMP){
+        case COMP_ZONE_ADD:
+          return{
+              ...state,
+              ZONE_NAME: "",
+              ZONE_ADDR: "",
+              REF_ID: "",
+              COMP_STATE: action.COMP,
+          };
+        case COMP_ZONE_EDIT:
+          return{
+              ...state,
+              ZONE_NAME: action.ZONE_NAME,
+              ZONE_ADDR: action.ZONE_ADDR,
+              REF_ID: action.REF_ID,
+              COMP_STATE: action.COMP,
+          };
+        default:{
+          return {
+            ...state,
+            COMP_STATE: action.COMP,
+          }
+        }
+      };
     default:
     return state;
   }

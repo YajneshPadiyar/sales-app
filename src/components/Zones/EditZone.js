@@ -13,7 +13,8 @@ import Divider from '@material-ui/core/Divider';
 
 import {
   zoneNameSelector,
-  zoneAddressSelector
+  zoneAddressSelector,
+  zoneRefIdSelector,
 } from './selectors';
 
 import {
@@ -28,6 +29,8 @@ import {
   onInputChange,
   onCreateZone,
   changeComponent,
+  onDeleteZone,
+  updateZone,
 } from './actions';
 
 const styles = theme => ({
@@ -61,7 +64,7 @@ const styles = theme => ({
   }
 });
 
-class CreateZone extends Component {
+class EditZone extends Component {
   render() {
     const {classes}=this.props;
     //console.log(this.props);
@@ -87,7 +90,7 @@ class CreateZone extends Component {
                 gutterBottom
                 color="primary"
               >
-                Create Zone
+                Edit Zone
               </Typography>
             </Grid>
             <Divider />
@@ -125,14 +128,27 @@ class CreateZone extends Component {
                 variant="contained"
                 color="primary"
                 className={classes.button}
-                onClick={this.props.onCreateZone({
-                  ZONE_NAME: this.props.ZONE_NAME,
-                  ZONE_ADDR: this.props.ZONE_ADDR,
-                  ZONE_TYPE: ZONE_TYPE,
-                  CREATED: new Date(),
-                  STATUS_CD: STATUS_ACTIVE
-                })}
-              >Create Zone</Button>
+                onClick={this.props.onUpdateZone(
+                  {
+                    REF_ID: this.props.REF_ID,
+                    ZONE_TYPE: ZONE_TYPE,
+                  },
+                  {
+                    ZONE_NAME: this.props.ZONE_NAME,
+                    ZONE_ADDR: this.props.ZONE_ADDR,
+                    UPDATED: new Date(),
+                    STATUS_CD: STATUS_ACTIVE
+                  }
+                )}
+              >Save Zone</Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+                onClick={this.props.onDelete(this.props.REF_ID)}
+              >
+                Delete Zone
+              </Button>
             </Grid>
           </Grid>
         </Paper>
@@ -141,23 +157,25 @@ class CreateZone extends Component {
   }
 }
 
-CreateZone.propTypes= {
+EditZone.propTypes= {
   ZONE_NAME: PropTypes.string,
   ZONE_ADDR: PropTypes.string,
 }
 
 const mapStateToProps = createStructuredSelector ({
   ZONE_NAME: zoneNameSelector(),
-  ZONE_ADDR: zoneAddressSelector()
+  ZONE_ADDR: zoneAddressSelector(),
+  REF_ID: zoneRefIdSelector(),
 });
 
 const mapDispatchToProps = dispatch => {
   return{
     onChangeEvent: (type) => (e) => dispatch(onInputChange({type: type, value:e.target.value})),
-    onCreateZone: (data) => (e) => dispatch(onCreateZone(data)),
+    onUpdateZone: (REF_ID,data) => (e) => dispatch(updateZone(REF_ID, data)),
     onCancel: (e) => dispatch(changeComponent(COMP_ZONE_LIST)),
+    onDelete: (REF_ID) => (e) => dispatch(onDeleteZone(REF_ID)),
   }
 };
 
 //console.log(mapStateToProps);
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CreateZone));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EditZone));

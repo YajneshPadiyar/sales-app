@@ -117,7 +117,7 @@ export const updateCustomer = (REF_ID, request) => {
     API_URI: UPDATE_CUSTOMER_URI,
     body: {
       REF_ID: REF_ID,
-      data: request
+      data: request,
     }
   }
 }
@@ -157,7 +157,7 @@ export const deletedCustomer = (response) =>{
 }
 
 export const filterSearch = (CustomerList, SearchString) => {
-  if(SearchString == ""){
+  if(SearchString === ""){
     return {
       type: UPDATE_AFTER_SEARCH,
       S_CustomerList: CustomerList,

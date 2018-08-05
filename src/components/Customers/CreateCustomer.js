@@ -66,7 +66,7 @@ const styles = theme => ({
   }
 });
 
-class CreateCustomer extends Component{
+export class CreateCustomer extends Component{
   render(){
     //console.log(this.props);
     const {classes}=this.props;

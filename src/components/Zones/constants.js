@@ -11,6 +11,8 @@ export const CHANGE_COMPONENT = "CHANGE_COMPONENT";
 export const COMP_ZONE_LIST = "COMP_ZONE_LIST";
 export const COMP_ZONE_ADD = "COMP_ZONE_ADD";
 export const COMP_ZONE_EDIT = "COMP_ZONE_EDIT";
+export const DELETE_ZONE = "DELETE_ZONE";
+export const UPDATE_ZONE = "UPDATE_ZONE";
 
 //other constants
 export const ZONE_TYPE = "LOCAL";
@@ -19,3 +21,5 @@ export const STATUS_ACTIVE = "Active";
 //api endpoints
 export const CREATE_ZONE_URI = "/createZone";
 export const GET_ZONE_URI = "/getZones";
+export const DELETE_ZONE_URI = "/deleteZone";
+export const UPDATE_ZONE_URI = "/updateZone";

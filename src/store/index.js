@@ -2,12 +2,13 @@ import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-//import { promiseMiddleware, localStorageMiddleware } from './middleware';
-import reducer from './reducers';
-
+//import { persistStore, persistReducer } from 'redux-persist';
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
-import mySaga from './sagas';
+
+import mySaga from '../sagas';
+import reducer from '../reducers';
+//import {persistConfig} from './persistConfig';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -26,7 +27,11 @@ const getMiddleware = () => {
   }
 };
 
+//const pReducer = persistReducer(persistConfig, reducer);
+
 export const store = createStore(
   reducer, composeWithDevTools(getMiddleware()));
 
-  sagaMiddleware.run(mySaga)
+//export const persistor = persistStore(store);
+
+sagaMiddleware.run(mySaga)

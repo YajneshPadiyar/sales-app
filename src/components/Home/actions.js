@@ -23,7 +23,7 @@ export const updateZoneList = (ZONE_LIST) => {
 }
 
 export const filterZone =(ZoneList, searchString) => {
-  if(searchString == ""){
+  if(searchString === ""){
     return {
       type: UPDATE_AFTER_SEARCH,
       ZONE_LIST: ZoneList,

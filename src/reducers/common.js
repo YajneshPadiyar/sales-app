@@ -6,8 +6,10 @@ import {
   REGISTER,
   APPLICATION_LOGIN,
   APP_GOTO_PAGE,
-  APP_UPDATE_TITLE
+  APP_UPDATE_TITLE,
 } from '../constants/actionTypes';
+
+//import {persistor} from '../store';
 
 const defaultState = {
   appName: 'Sales App',

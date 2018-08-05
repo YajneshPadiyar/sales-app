@@ -4,18 +4,19 @@ import {store, history} from '../../../store';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 
-import CreateCustomer from '../CreateCustomer';
+import {CreateCustomer} from '../CreateCustomer';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 describe('Test Create Customer Component', () => {
 
     it('should render title', () => {
       const createCustomer = shallow(
-        <Provider store={store}>
+
             <CreateCustomer/>
-        </Provider>
+        
       );
       //console.log(createCustomer);
-      expect(createCustomer.find(CreateCustomer).length).toEqual(1);
+      expect(createCustomer.find('Create').length).toBe(1);
     });
 });

@@ -31,3 +31,13 @@ export const currentCompSelector = () => createSelector(
   zoneState,
   (zone) => zone.COMP_STATE
 );
+
+export const filteredZoneList = () => createSelector(
+  zoneState,
+  (zone) => zone.S_ZONE_LIST
+);
+
+export const zoneRefIdSelector = () => createSelector(
+  zoneState,
+  (zone) => zone.REF_ID
+);

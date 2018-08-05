@@ -105,7 +105,7 @@ class CustomerList extends Component{
       <Paper className ={classes.paper}>
         <div>
           <Button variant="fab" color="primary" aria-label="Add"
-            className={classes.button, classes.fab}
+            className={ classes.fab }
             onClick= {this.props.showAddCustomer()}
           >
             <AddIcon />

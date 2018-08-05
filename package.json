@@ -6,11 +6,12 @@
     "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "react-scripts": "^1.1.1"
+    "react-scripts": "^1.1.4"
   },
   "dependencies": {
     "@material-ui/core": "^1.2.1",
     "@material-ui/icons": "^1.1.0",
+    "classnames": "^2.2.6",
     "history": "^4.6.3",
     "lodash": "^4.17.10",
     "marked": "^0.3.6",

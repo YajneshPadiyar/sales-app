@@ -33,7 +33,7 @@ class ApplicationMenu extends Component {
 
   OnMenuItemClick =(path)=> (event) => {
     //alert("Selected MenuItem is ");
-    console.log(path);
+    //console.log(path);
 
     this.setState({openMenu: false});
     this.props.menuHandler(path);

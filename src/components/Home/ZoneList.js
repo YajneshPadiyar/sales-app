@@ -21,7 +21,7 @@ import {
   incrementPage,
   decrementPage,
   getCurrentPageData,
-  chnageField,
+//  chnageField,
  } from './actions';
 
 import { ZONE_TYPE } from '../Zones/constants';

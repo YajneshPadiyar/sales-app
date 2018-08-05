@@ -25,18 +25,20 @@ import {
   decrementPage,
   getCurrentPageData,
   changeComponent,
+  editZone,
 } from './actions';
 
 import {
   ZONE_TYPE,
   COMP_ZONE_ADD,
+  COMP_ZONE_EDIT,
 } from './constants';
 
 import {
   zoneListSelector,
   currentPageSelector,
   currentPageSizeSelector,
-  currentCompSelector,
+  filteredZoneList,
 } from './selectors';
 
 const styles = theme => ({
@@ -70,8 +72,8 @@ class ZoneList extends Component {
     const ZoneListAPI = this.props.ZoneList;
     const CurrentPage = this.props.CurrentPage;
     const CurrentPageSize = this.props.CurrentPageSize;
-
-    const currentZoneList = getCurrentPageData(ZoneListAPI, CurrentPage, CurrentPageSize);
+    const S_ZONE_LIST = this.props.S_ZONE_LIST;
+    const currentZoneList = getCurrentPageData(S_ZONE_LIST, CurrentPage, CurrentPageSize);
     const ZoneList = currentZoneList.map(item=>{
       return (
         <ListItem key={item.REF_ID} divider>
@@ -81,12 +83,14 @@ class ZoneList extends Component {
             </Avatar>
           </ListItemAvatar>
           <ListItemText
-            primary={item.ZONE_NAME}
+            primary={item.ZONE_NAME+", "+item.REF_ID}
             secondary={item.ZONE_ADDR}
           />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Delete">
-              <EditIcon />
+            <IconButton aria-label="Delete"
+              onClick={this.props.onEditZone(item)}
+            >
+              <EditIcon/>
             </IconButton>
           </ListItemSecondaryAction>
         </ListItem>
@@ -98,7 +102,7 @@ class ZoneList extends Component {
       <Paper className={classes.paper}>
         <div>
           <Button variant="fab" color="primary" aria-label="Add"
-            className={classes.button, classes.fab}
+            className={ classes.fab }
             onClick= {this.props.onChangeComp(COMP_ZONE_ADD)}
           >
             <AddIcon />
@@ -107,7 +111,7 @@ class ZoneList extends Component {
         <TextField
           lable="Search Zone"
           type="text"
-          onChange={this.props.onFilterSearch}
+          onChange={this.props.onFilterSearch(ZoneListAPI)}
         />
         <List>
           {ZoneList}
@@ -147,6 +151,7 @@ const mapStateToProps  = createStructuredSelector({
   ZoneList: zoneListSelector(),
   CurrentPage: currentPageSelector(),
   CurrentPageSize: currentPageSizeSelector(),
+  S_ZONE_LIST: filteredZoneList(),
 });
 
 //console.log(mapStateToProps());
@@ -158,6 +163,7 @@ const mapDispatchToProps = dispatch => {
     onDecrement: (CurrentPage) => (e) => dispatch(decrementPage(CurrentPage)),
     onChangeComp: (comp) => (e) => dispatch(changeComponent(comp)),
     onFilterSearch: (ZoneList) => (e) => dispatch(filterZone(ZoneList, e.target.value)),
+    onEditZone: (item) => (e) => dispatch(editZone(item)),
   }
 };
 //console.log(mapStateToProps);

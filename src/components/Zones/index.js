@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 
 import CreateZones from './CreateZones';
 import ZoneList from './ZoneList';
+import EditZone from './EditZone';
 
 import {
   COMP_ZONE_ADD,
@@ -35,7 +36,7 @@ class Zones extends Component {
     this.displayComp = (type) =>{
       switch(type){
         case COMP_ZONE_EDIT:
-        return ;
+        return <EditZone/>;
         case COMP_ZONE_ADD:
         return <CreateZones/>;
         default:
@@ -51,7 +52,7 @@ class Zones extends Component {
         direction="row"
       >
         <Grid className={classes.gridItem}>
-          {this.displayComp(this.props.currentComp)}
+          {this.displayComp(currentComp)}
         </Grid>
       </Grid>
     );

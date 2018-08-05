@@ -85,7 +85,7 @@ const mapDispatchToProps = dispatch => {
       menuHandler: (path) => {
         dispatch(onMenuChange());
         dispatch(onMenuClick(path));
-        console.log(path);
+        //console.log(path);
       },
       menuClick: (e) => dispatch(onMenuChange())
   }

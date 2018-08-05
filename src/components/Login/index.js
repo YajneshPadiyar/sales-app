@@ -27,7 +27,7 @@ const styles = theme => ({
 });
 
 
-class Login extends Component{
+  class Login extends Component{
 
   render(){
     const viewType = this.props.ComponentView;
